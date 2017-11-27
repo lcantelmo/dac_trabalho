@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:form>
+	<div>
+		<h:outputLabel value="Titulo:"/>
+		<h:inputText value="#{projetoBean.projeto.titulo}"/>
+	</div>
+	<div>
+		<h:outputLabel value="Tema:"/>
+		<h:inputTextarea row = "10" col = "30" value="#{projetoBean.projeto.tema}"/>
+	</div>
+	<div>
+	    <h:outputLabel value="Alunos" />
+	    <!--valores que serão recebidos após a seleção convertidos em Integer--> 
+	    <h:selectManyListbox value="#{projetoBean.alunosId}" converter="javax.faces.Integer"> 
+	    	<!--valores que aparecerão na lista -->
+	        <f:selectItems value="#{projetoBean.alunos}"
+	         var="aluno"
+	         itemValue="#{aluno.id}"
+	         itemLabel="#{aluno.nome}"/>
+	    </h:selectManyListbox>
+	</div>
+	<div>
+	    <h:outputLabel value="Orientadores" />
+	    <!--valores que serão recebidos após a seleção convertidos em Integer--> 
+	    <h:selectManyListbox value="#{projetoBean.professoresId}" converter="javax.faces.Integer"> 
+	    	<!--valores que aparecerão na lista -->
+	        <f:selectItems value="#{projetoBean.professores}"
+	         var="professor"
+	         itemValue="#{professor.id}"
+	         itemLabel="#{professor.nome}"/>
+	    </h:selectManyListbox>
+	</div>
+	<div>
+		<h:outputLabel value="Nota TCC1:"/>
+		<h:inputText value="#{projetoBean.projeto.nota_tcc1}" converter="javax.faces.Float"/>
+	</div>
+	<div>
+		<h:outputLabel value="Nota TCC2:"/>
+		<h:inputText value="#{projetoBean.projeto.nota_tcc2}" converter="javax.faces.Float"/>
+	</div>
+	<div>
+		<h:outputLabel value="Local Defesa:"/>
+		<h:inputText value="#{projetoBean.projeto.local}"/>
+	</div>
+	<div>
+		<h:outputLabel value="Versão Parcial:"/>
+		<h:inputText value="#{projetoBean.projeto.versoesParciais}"/>
+	</div>
+	<div>
+		<h:outputLabel value="Versão Final:"/>
+		<h:inputText value="#{projetoBean.projeto.versaoFinal}" converter="javax.faces.Integer"/>
+	</div>
+	<h:commandButton value="Criar" action="#{projetoBean.salvar}"/>
+</h:form>
+</html>
