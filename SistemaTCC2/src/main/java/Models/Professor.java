@@ -10,7 +10,7 @@ public class Professor extends Usuario{
 	public Professor() {
 	}
 	
-	public Professor(Integer id) {
+	public Professor(Long id) {
 		super.setId(id);
 	}
 }

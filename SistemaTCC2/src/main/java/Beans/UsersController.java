@@ -7,24 +7,23 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import DAO.UsersEJB;
-import Models.Users;
+import Models.Usuario;
 
 @ManagedBean(name="users")
 @RequestScoped
 public class UsersController {
     FacesContext context = FacesContext.getCurrentInstance();
         
-    private Users user;
+    private Usuario user;
     
     @EJB
     UsersEJB userEJB;
     
-    private List<Users> userList = new ArrayList();
+    private List<Usuario> userList = new ArrayList();
     
     public String LogIn() {
     		String type = null;
@@ -45,6 +44,13 @@ public class UsersController {
     		return "usuário inexistente";
     }
     
+    public Usuario getUser() {
+        return user;
+    }
+
+    public void setUser(Usuario user) {
+        this.user = user;
+    }
 
     public String addUser(){
         try
@@ -72,11 +78,11 @@ public class UsersController {
     
     @PostConstruct
     public void getAllUsersList(){
-        user = new Users();
+        user = new Usuario();
         userList = userEJB.allUsers();
         
     }
-    public String editUsers(Users user){
+    public String editUsers(Usuario user){
         this.user = user; 
         return "edit.xhtml";
     }
@@ -113,7 +119,7 @@ public class UsersController {
         }
         
     }
-    public String deleteUser(Users getUser){
+    public String deleteUser(Usuario getUser){
         try
         {
             userEJB.deleteUsers(getUser);
@@ -129,19 +135,12 @@ public class UsersController {
         }
     }
     
-    public Users getUser() {
-        return user;
-    }
-
-    public void setUser(Users user) {
-        this.user = user;
-    }
-
-    public List<Users> getUserList() {
+   
+    public List<Usuario> getUserList() {
         return userList;
     }
 
-    public void setUserList(List<Users> userList) {
+    public void setUserList(List<Usuario> userList) {
         this.userList = userList;
     }
     

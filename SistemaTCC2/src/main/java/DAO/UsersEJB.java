@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import Models.Users;
+import Models.Usuario;
 
 
 
@@ -25,7 +25,7 @@ public class UsersEJB {
     
     
 	public String autenticar(String username, String password) {
-		Users user = getUsername(username);
+		Usuario user = getUsername(username);
 		
 		if(user != null && user.getPassword().equals(password)) {
 			if(user.getUserType().equals("ADM") ) {
@@ -42,42 +42,44 @@ public class UsersEJB {
 	}
   
      
-    public List<Users> allUsers(){
-        TypedQuery<Users> users = em.createNamedQuery("allUsers", Users.class);
-        return users.getResultList();
+    public List<Usuario> allUsers(){
+        TypedQuery<Usuario> usuario = em.createNamedQuery("allUsers", Usuario.class);
+        return usuario.getResultList();
     }
     
-    public Users getUsername(String username){
-    	TypedQuery<Users> user =  em.createNamedQuery("getUsername", Users.class).setParameter("username", username);
-    	  
-    	  return user.getSingleResult();
+    public Usuario getUsername(String username){
+    	TypedQuery<Usuario> user =  em.createNamedQuery("getUsername", Usuario.class).setParameter("username", username);
+    		if(user != null) {
+    			return user.getSingleResult();
+    		}else
+    			return null;
     }
     
-    public Users getEmail(String email){
-        return em.find(Users.class, email);
+    public Usuario getEmail(String email){
+        return em.find(Usuario.class, email);
     }
     
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Users saveUser(Users user){
+    public Usuario saveUser(Usuario user){
         em.persist(user);
         em.flush();
         return user;
     }
     
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Users mergeUser(Users user){
+    public Usuario mergeUser(Usuario user){
         
         System.out.println("--------------------5--------------------------------");
         System.out.println(user.getId());
         System.out.println("----------------------6------------------------------");
-        em.merge(em.find(Users.class,user.getId()));
+        em.merge(em.find(Usuario.class,user.getId()));
         
         System.out.println("------------------------7----------------------------");
         return user;
     }
     
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void deleteUsers(Users user) throws Exception{
+    public void deleteUsers(Usuario user) throws Exception{
         try
         {
             em.remove(em.merge(user));
@@ -90,7 +92,7 @@ public class UsersEJB {
     }
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Users editUsers(Users user) throws Exception {
+    public Usuario editUsers(Usuario user) throws Exception {
         try
         {
             em.merge(user);

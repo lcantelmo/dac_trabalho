@@ -10,7 +10,7 @@ public class Aluno extends Usuario{
 	public Aluno(){
 	}
 	
-	public Aluno(Integer alunoId) {
+	public Aluno(Long alunoId) {
 		super.setId(alunoId);
 	}
 	

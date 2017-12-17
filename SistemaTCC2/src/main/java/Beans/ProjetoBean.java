@@ -20,8 +20,8 @@ import Models.Projeto;
 public class ProjetoBean {
 	
 	private Projeto projeto = new Projeto();
-	private List<Integer> alunosId = new ArrayList<>();
-	private List<Integer> professoresId = new ArrayList<>();
+	private List<Long> alunosId = new ArrayList<>();
+	private List<Long> professoresId = new ArrayList<>();
 	
 	@Inject
 	private ProjetoDao dao;
@@ -34,10 +34,10 @@ public class ProjetoBean {
 	
 	@Transactional
 	public void salvar() {
-		for(Integer alunoId : alunosId) {
+		for(Long alunoId : alunosId) {
 			projeto.getAlunos().add(new Aluno(alunoId));
 		}
-		for(Integer professorId : professoresId) {
+		for(Long professorId : professoresId) {
 			projeto.getOrientadores().add(new Professor(professorId));
 		}
 		dao.salvar(projeto);
@@ -56,19 +56,19 @@ public class ProjetoBean {
 		this.projeto = projeto;
 	}
 
-	public List<Integer> getAlunosId() {
+	public List<Long> getAlunosId() {
 		return alunosId;
 	}
 
-	public void setAlunosId(List<Integer> alunosId) {
+	public void setAlunosId(List<Long> alunosId) {
 		this.alunosId = alunosId;
 	}
 
-	public List<Integer> getProfessoresId() {
+	public List<Long> getProfessoresId() {
 		return professoresId;
 	}
 
-	public void setProfessoresId(List<Integer> professorId) {
+	public void setProfessoresId(List<Long> professorId) {
 		this.professoresId = professorId;
 	}
 	
