@@ -27,12 +27,12 @@ public class UsersController {
     
     public String LogIn() {
     		String type = null;
-    		type  = userEJB.autenticar(user.getUserName(), user.getPassword());
+    		type  = userEJB.autenticar(user.getMatricula(), user.getPassword());
     		if(type != null) {
     			if(type.equals("admin")) {
     				return "administrador";
     			}else if (type.equals("aluno")) {
-    				return "aluno";
+    				return "aluno/form.xhtml";
     			}else if (type.equals("prof")) {
     				return "professor";
     			}else if(type.equals("INVALIDO")) {

@@ -12,16 +12,13 @@ import javax.persistence.InheritanceType;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
-/**
- *
- * @author MstfDryl
- */
 @Entity(name="USERS")
 @Inheritance (strategy = InheritanceType.SINGLE_TABLE)
 @NamedQueries({
     @NamedQuery(name="allUsers", query="SELECT u FROM USERS u"),
-    @NamedQuery(name="getUsername", query="SELECT u FROM USERS u WHERE u.userName = :username"),
-    @NamedQuery(name="getEmail", query="SELECT u FROM USERS u WHERE u.email = :email")
+    @NamedQuery(name="getUsername", query="SELECT u FROM USERS u WHERE u.name = :name"),
+    @NamedQuery(name="getEmail", query="SELECT u FROM USERS u WHERE u.email = :email"),
+    @NamedQuery(name="getMatricula", query="SELECT u FROM USERS u WHERE u.matricula = :matricula")
 })
 public class Usuario implements Serializable {
     
@@ -30,8 +27,8 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
-    @Column(name="USERNAME", length=200, nullable=false)
-    private String userName;
+    @Column(name="NAME", length=200, nullable=false)
+    private String name;
     
     @Column(name="PASSWORD", length=255, nullable=false)
     private String password;
@@ -54,8 +51,8 @@ public class Usuario implements Serializable {
     	this.id = id;
     }
     
-    public Usuario(String userName, String password, String email, String userType) {
-        this.userName = userName;
+    public Usuario(String name, String password, String email, String userType) {
+        this.name = name;
         this.password = password;
         this.email = email;
         this.userType = userType;
@@ -69,12 +66,12 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {

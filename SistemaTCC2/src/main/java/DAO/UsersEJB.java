@@ -25,8 +25,8 @@ public class UsersEJB {
     private EntityManager em;
     
     
-	public String autenticar(String username, String password) {
-		Usuario user = getUsername(username);
+	public String autenticar(String matricula, String password) {
+		Usuario user = getMatricula(matricula);
 		
 		if(user != null && user.getPassword().equals(password)) {
 			return user.getUserType();
@@ -35,21 +35,21 @@ public class UsersEJB {
 		
 	}
   
+	public Usuario getMatricula(String matricula){
+		TypedQuery<Usuario> user =  em.createNamedQuery("getMatricula", Usuario.class).setParameter("matricula", matricula);
+		try {
+			return user.getSingleResult();	
+		} catch (Exception e) {
+			System.out.println("Erro:   "+e);
+			return null;
+		} 
+	}
      
     public List<Usuario> allUsers(){
         TypedQuery<Usuario> usuario = em.createNamedQuery("allUsers", Usuario.class);
         return usuario.getResultList();
     }
     
-    public Usuario getUsername(String username){
-    	TypedQuery<Usuario> user =  em.createNamedQuery("getUsername", Usuario.class).setParameter("username", username);
-    	try {
-		return user.getSingleResult();	
-		} catch (Exception e) {
-				System.out.println("Erro:   "+e);
-				return null;
-		} 
-    }
     
     public Usuario getEmail(String email){
         return em.find(Usuario.class, email);
