@@ -9,3 +9,20 @@ INSERT INTO usuario (TipoUsuario, cpf, matricula, nome, senha) VALUES ("admin", 
 select * from usuario;
 select * from projeto;
 select * from projeto_usuario;
+
+
+
+
+
+
+INSERT INTO USERS (DTYPE,ID,email,matricula, password, username, user_type) VALUES ("aluno", 10,'bfmello[at]hotmail.com', 213083123, "BERNARDO DE FARIAS", "123456", 'aluno');
+INSERT INTO USERS(DTYPE,ID,email, matricula, password, username, user_type) VALUES ("aluno",11,' ', 213083124, "LEONARDO CANTELMO", "123456",'aluno');
+INSERT INTO USERS(DTYPE,ID,email, matricula, password, username, user_type) VALUES ("aluno",12,' ', 213083125, "LUIZ FELIPE", "123456",'aluno');
+INSERT INTO USERS(DTYPE,ID,email,  matricula, password, username, user_type) VALUES ("aluno",13, ' ', 213083126, "THIAGO OLIVEIRA", "123456",'aluno');
+INSERT INTO USERS(DTYPE,ID,email, matricula, password, username, user_type) VALUES ("prof", 14,' ', 654321, "JOSÉ VITERBO FILHO", "123456",'prof');
+INSERT INTO USERS(DTYPE,ID,email,  matricula, password, username, user_type) VALUES ("prof", 15,' ', 654322, "VICTOR ALMEIDA", "123456",'prof');
+INSERT INTO USERS(DTYPE,ID,email,  matricula, password, username, user_type) VALUES ("admin",16, ' ', 654323, "LEONARDO CRUZ", "123456", 'admin');
+
+select * from usuario;
+select * from projeto;
+select * from projeto_usuario;

@@ -100,5 +100,13 @@ public class Usuario implements Serializable {
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
     
 }

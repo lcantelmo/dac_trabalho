@@ -29,11 +29,11 @@ public class UsersController {
     		String type = null;
     		type  = userEJB.autenticar(user.getUserName(), user.getPassword());
     		if(type != null) {
-    			if(type.equals("ADM")) {
+    			if(type.equals("admin")) {
     				return "administrador";
-    			}else if (type.equals("STD")) {
+    			}else if (type.equals("aluno")) {
     				return "aluno";
-    			}else if (type.equals("PFS")) {
+    			}else if (type.equals("prof")) {
     				return "professor";
     			}else if(type.equals("INVALIDO")) {
     			FacesMessage fm = new FacesMessage("Login ou senha inválidos");

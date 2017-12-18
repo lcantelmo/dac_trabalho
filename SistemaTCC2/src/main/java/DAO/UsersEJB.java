@@ -29,14 +29,7 @@ public class UsersEJB {
 		Usuario user = getUsername(username);
 		
 		if(user != null && user.getPassword().equals(password)) {
-			if(user.getUserType().equals("ADM") ) {
-				return "ADM";
-			} else if(user.getUserType().equals("STD") ) {
-				return "STD";
-			}else if(user.getUserType().equals("PFS") ) {
-				return "PFS"; 
-			}
-			
+			return user.getUserType();
 		}
 		return "INVALIDO";
 		
