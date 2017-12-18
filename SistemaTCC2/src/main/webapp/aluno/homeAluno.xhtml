@@ -82,18 +82,19 @@
 		</span>
 		
 		
-		<span style="float: right;">
-			<span style="font-size: 17px; padding-right: 200px;">
-				Bem-vindo(a) Lucas (Aluno)
-			</span>
+			<h:form style="float: right;">
+				<span style="float: right;">
+					<span style="font-size: 17px; padding-right: 200px;">
+						Bem-vindo(a) <h:outputText value="#{sessionScope.name}" /> 
+					</span>
 			
-			<span style="font-size: 17px;padding-right: 20px;">
-				<a href="#">
-					<img src="images/icon-logout.png" height="25px" style="margin-bottom: -7px;"/>
-					Sair
-				</a>
-			</span>
-		</span>
+					<span style="font-size: 17px;padding-right: 20px;">
+						<h:commandLink value="Sair" action="#{users.logOut}">
+							<h:graphicImage value="../images/icon-logout.png" height="25px" style="margin-bottom: -7px;"/>
+						</h:commandLink>
+					</span>
+				</span>
+			</h:form>
 		
 	</div>
 	

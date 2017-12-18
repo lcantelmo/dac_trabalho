@@ -1,17 +1,19 @@
 package Beans;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
+import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
 
 import DAO.UsersEJB;
 import Models.Usuario;
+import utils.SessionUtils;
 
 @ManagedBean(name="users")
 @RequestScoped
@@ -26,23 +28,40 @@ public class UsersController {
     private List<Usuario> userList = new ArrayList();
     
     public String LogIn() {
-    		String type = null;
-    		type  = userEJB.autenticar(user.getMatricula(), user.getPassword());
-    		if(type != null) {
-    			if(type.equals("admin")) {
-    				return "home";
-    			}else if (type.equals("aluno")) {
-    				return "aluno/homeAluno.xhtml";
-    			}else if (type.equals("prof")) {
-    				return "professor";
-    			}else if(type.equals("INVALIDO")) {
-    			FacesMessage fm = new FacesMessage("Login ou senha inválidos");
-    			FacesContext.getCurrentInstance().addMessage("msg", fm);
+    		Usuario user= null;
+    		user = userEJB.autenticar(this.user.getMatricula(), this.user.getPassword());
+    		if(user != null) {
+    			
+    			if(user.getUserType().equals("INVALIDO")) {
+	    			FacesMessage fm = new FacesMessage("Login ou senha inválidos");
+	    			FacesContext.getCurrentInstance().addMessage("msg", fm);
+    			}else {
+    				
+    				HttpSession session = SessionUtils.getSession();
+    				session.setAttribute("name",user.getName());
+    				
+    				if(user.getUserType().equals("admin")) {
+    					return "/home?faces-redirect=true";
+    				}else if (user.getUserType().equals("aluno")) {
+    					return "/aluno/homeAluno.xhtml?faces-redirect=true";
+    				}else if (user.getUserType().equals("prof")) {
+    					return "/professor?faces-redirect=true";
+    				}
     			}
+    		}else {
+    			FacesMessage fm = new FacesMessage("usuário inexistente");
+    			FacesContext.getCurrentInstance().addMessage("msg", fm);
     		}
-    		
-    		return "usuário inexistente";
+		return "/login?faces-redirect=true";
     }
+    
+
+  	public String logOut() {
+  		HttpSession session = SessionUtils.getSession();
+  		session.invalidate();
+  		return "/login?faces-redirect=true";
+  	}
+	
     
     public Usuario getUser() {
         return user;
@@ -142,6 +161,6 @@ public class UsersController {
 
     public void setUserList(List<Usuario> userList) {
         this.userList = userList;
-    }
+        }
     
 }

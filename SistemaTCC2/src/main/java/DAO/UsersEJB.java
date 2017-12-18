@@ -25,13 +25,13 @@ public class UsersEJB {
     private EntityManager em;
     
     
-	public String autenticar(String matricula, String password) {
+	public Usuario autenticar(String matricula, String password) {
 		Usuario user = getMatricula(matricula);
 		
 		if(user != null && user.getPassword().equals(password)) {
-			return user.getUserType();
+			return user;
 		}
-		return "INVALIDO";
+		return null;
 		
 	}
   
