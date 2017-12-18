@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -49,10 +50,12 @@ public class UsersEJB {
     
     public Usuario getUsername(String username){
     	TypedQuery<Usuario> user =  em.createNamedQuery("getUsername", Usuario.class).setParameter("username", username);
-    		if(user != null) {
-    			return user.getSingleResult();
-    		}else
-    			return null;
+    	try {
+		return user.getSingleResult();	
+		} catch (Exception e) {
+				System.out.println("Erro:   "+e);
+				return null;
+		} 
     }
     
     public Usuario getEmail(String email){
