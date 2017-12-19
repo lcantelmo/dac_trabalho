@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+
+	<meta charset="utf-8"/>
+	<h:title>Cadastrar Projeto</h:title>
+
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:800" rel="stylesheet"/>
+
+	<style>
+		.alinhar-hev{
+			display: -webkit-flex;
+			display: flex;
+			-webkit-align-items: center;
+			align-items: center;
+			-webkit-justify-content: center;
+			justify-content: center;
+		}
+		
+		.alinhar-h{
+			display: -webkit-flex;
+			display: flex;
+			-webkit-justify-content: center;
+			justify-content: center;
+		}
+		
+		.alinhar-v{
+			display: -webkit-flex;
+			display: flex;
+			-webkit-align-items: center;
+			align-items: center;
+		}
+		
+		.aplicar-fonte{
+			font-family: 'Open Sans', sans-serif;
+			font-weight: 800;
+		}
+		
+		a:link, a:visited {
+			text-decoration: none;
+			color: #fff;
+		}
+		a:hover {
+			text-decoration: underline; 
+			color: #fff;
+		}
+		a:active {
+			text-decoration: none;
+		}
+		
+		::-webkit-input-placeholder { /* WebKit browsers */
+			color: #BFBFBF;
+		}
+
+		.img-transparencia-001:hover{
+			opacity: 0.80;
+			-webkit-transition: 0.25s ease-out;
+			-moz-transition: 0.25s ease-out;
+			-o-transition: 0.25s ease-out;
+			transition: 0.25s ease-out;
+		}
+	
+	</style>
+	
+</h:head>
+<h:body style="background-color:#E9EBEE;">
+
+	<div style="width: 100%; background-color: #38547B; top: 0%; left: 0%; position: absolute; color: #fff; padding-top: 15px; padding-bottom: 15px;" class="aplicar-fonte">
+		<span style="font-size: 19px; padding-left: 30px;">
+			<a href="#">
+				Sistema de TCC's
+			</a>
+		</span>
+		<h:form style="float: right;">
+			<span style="float: right;">
+				<span style="font-size: 17px; padding-right: 200px;">
+					Bem-vindo(a) <h:outputText value="#{sessionScope.name}" /> 
+				</span>
+			
+				<span style="font-size: 17px;padding-right: 20px;">
+					<h:commandLink value="Sair" action="#{users.logOut}">
+						<h:graphicImage value="../images/icon-logout.png" height="25px" style="margin-bottom: -7px;"/>
+					</h:commandLink>
+				</span>
+			</span>
+		</h:form>
+	</div>
+	
+	<div style="color: #fff; margin-top: 100px; padding-left: 0px;" class="aplicar-fonte" align="center">
+		
+		<div class="aplicar-fonte" style="background-color: #38547B; width: 600px; padding-top: 10px; padding-bottom: 10px; padding-left: 30px; margin-top: -5px;" align="left">
+				+ Projeto
+		</div>
+		
+		<h:form>
+			<div  class="aplicar-fonte" style="background-color: #fff; width: 400px; color: #000;
+			padding-left: 100px; padding-top: 40px;" align="left">
+				<div style="padding-bottom: 20px;">
+					<h:outputLabel value="Titulo:"/>
+					<h:inputText value="#{projetoBean.projeto.titulo}" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
+				</div>
+				<div style="padding-bottom: 20px;">
+					<h:outputLabel value="Tema:"/>
+					<h:inputTextarea row = "10" col = "30" value="#{projetoBean.projeto.tema}" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
+				</div>
+				<div style="padding-bottom: 20px;">
+				    <h:outputLabel value="Alunos: " />
+				    <!--valores que serão recebidos após a seleção convertidos em Integer--> 
+				    <h:selectManyListbox value="#{projetoBean.alunosId}" converter="javax.faces.Integer" style="margin-left: 20px;" size="5" aria-required="true" aria-invalid="false" > 
+				    	<!--valores que aparecerão na lista -->
+				        <f:selectItems value="#{projetoBean.alunos}"
+				         var="aluno"
+				         itemValue="#{aluno.id}"
+				         itemLabel="#{aluno.name}"/>
+				    </h:selectManyListbox>
+				</div>
+				<div style="padding-bottom: 20px;">
+				    <h:outputLabel value="Orientadores: " />
+				    <!--valores que serão recebidos após a seleção convertidos em Integer--> 
+				    <h:selectManyListbox value="#{projetoBean.professoresId}" converter="javax.faces.Integer" style="margin-left: 20px;" size="5" aria-required="true" aria-invalid="false" > 
+				    	<!--valores que aparecerão na lista -->
+				        <f:selectItems value="#{projetoBean.professores}"
+				         var="professor"
+				         itemValue="#{professor.id}"
+				         itemLabel="#{professor.name}"/>
+				    </h:selectManyListbox>
+				</div>
+				<div  style="padding-bottom: 20px;">
+					<h:outputLabel value="Nota TCC1:"/>
+					<h:inputText value="#{projetoBean.projeto.nota_tcc1}" converter="javax.faces.Float" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
+				</div>
+				<div  style="padding-bottom: 20px;">
+					<h:outputLabel value="Nota TCC2:"/>
+					<h:inputText value="#{projetoBean.projeto.nota_tcc2}" converter="javax.faces.Float" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
+				</div>
+				<div  style="padding-bottom: 20px;">
+					<h:outputLabel value="Local Defesa:"/>
+					<h:inputText value="#{projetoBean.projeto.local}" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
+				</div>
+				<div  style="padding-bottom: 20px;">
+					<h:outputLabel value="Versão Parcial:" />
+					<h:inputText value="#{projetoBean.projeto.versoesParciais}" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false"/>
+				</div>
+				<div  style="padding-bottom: 20px;">
+					<h:outputLabel value="Versão Final:"/>
+					<h:inputText value="#{projetoBean.projeto.versaoFinal}" converter="javax.faces.Integer" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
+				</div>
+				<div align="right" style="padding-right: 90px; padding-bottom: 25px; padding-top: 20px;">
+					<h:commandButton style="color: #000;" value="Criar" action="#{projetoBean.salvar}"/>
+				</div>
+			</div>
+		</h:form>
+	</div>
+</h:body>
+</html>
