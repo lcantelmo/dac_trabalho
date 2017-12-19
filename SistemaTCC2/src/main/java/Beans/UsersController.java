@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -16,6 +17,7 @@ import utils.SessionUtils;
 
 @ManagedBean(name="users")
 @RequestScoped
+@LocalBean
 public class UsersController {
     FacesContext context = FacesContext.getCurrentInstance();
         
@@ -38,6 +40,7 @@ public class UsersController {
     				
     				HttpSession session = SessionUtils.getSession();
     				session.setAttribute("name",user.getName());
+    				session.setAttribute("user_type",user.getUserType());
     				
     				if(user.getUserType().equals("admin")) {
     					return "/admin/homeAdmin.xhtml?faces-redirect=true";
