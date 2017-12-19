@@ -1,11 +1,10 @@
 package Beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
-import java.util.ArrayList;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -20,7 +19,7 @@ import utils.SessionUtils;
 public class UsersController {
     FacesContext context = FacesContext.getCurrentInstance();
         
-    private Usuario user;
+    private Usuario user = new Usuario();
     
     @EJB
     UsersEJB userEJB;
@@ -72,12 +71,6 @@ public class UsersController {
     }
 
     
-    @PostConstruct
-    public void getAllUsersList(){
-        user = new Usuario();
-        userList = userEJB.allUsers();
-        
-    }
     public String editUsers(Usuario user){
         this.user = user; 
         return "edit.xhtml";

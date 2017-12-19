@@ -51,10 +51,11 @@ public class Usuario implements Serializable {
     	this.id = id;
     }
     
-    public Usuario(String name, String password, String email, String userType) {
+    public Usuario(String name, String password, String email,String matricula, String userType) {
         this.name = name;
         this.password = password;
         this.email = email;
+        this.matricula = matricula;
         this.userType = userType;
     }
 
