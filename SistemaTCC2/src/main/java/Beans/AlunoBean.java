@@ -15,23 +15,42 @@ import Models.Aluno;
 @RequestScoped
 public class AlunoBean {
 	private Aluno aluno = new Aluno();
+	  FacesContext context = FacesContext.getCurrentInstance();
 	
 	@Inject
 	private AlunoDao dao;
 	
 	
-	public void salvar() {
+	public String salvar() {
 		aluno.setUserType("aluno");
+		if(!this.aluno.getEmail().contains("@") || !this.aluno.getEmail().contains("."))
+        {
+            context.addMessage(null, new FacesMessage("Invalid email"));
+            return null;
+        }
 		try {
 			dao.salvar(aluno);
-			FacesMessage fm = new FacesMessage("Aluno Cadastrado");
-			FacesContext.getCurrentInstance().addMessage("msg", fm);
-			
+			context.addMessage(null, new FacesMessage("Aluno Cadastrado"));
 		} catch (Exception e) {
-			FacesMessage fm = new FacesMessage("Aluno não cadastrado");
-			FacesContext.getCurrentInstance().addMessage("msg", fm);
+			context.addMessage(null, new FacesMessage("Aluno não cadastrado"));
 			System.out.println("Erro:   "+e.getStackTrace());
 		}
+		return null;
+	}
+	
+	public String alterar() {
+		 
+		if(!this.aluno.getEmail().contains("@") || !this.aluno.getEmail().contains("."))
+	        {
+	            context.addMessage(null, new FacesMessage("Invalid email"));
+	            return null;
+	        }
+		try {
+			dao.editAlunos(this.aluno);
+		} catch (Exception e) {
+			context.addMessage(null, new FacesMessage("Não foi possível alterar aluno"+e));
+		}
+		return null;
 	}
 	
 	public List<Aluno> listar() {

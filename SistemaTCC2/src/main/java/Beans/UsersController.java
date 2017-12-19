@@ -71,29 +71,6 @@ public class UsersController {
         this.user = user;
     }
 
-    public String addUser(){
-        try
-        {
-            if(!user.getEmail().contains("@") || !user.getEmail().contains("."))
-            {
-                context.addMessage(null, new FacesMessage("Geçerli e-Mail değil"));
-                return null;
-            }
-                
-            
-            user = userEJB.saveUser(user);
-            
-            userList = userEJB.allUsers();
-            
-            context.addMessage(null, new FacesMessage("Kullanıcı Başarı ile Eklendi..."));
-            return "index.xhtml?faces-redirect=true";
-        }
-        catch(Exception e)
-        {
-            context.addMessage(null, new FacesMessage("Kullanıcı Eklenirken Hata Oluştu... \n "+e));
-            return null;
-        }
-    }
     
     @PostConstruct
     public void getAllUsersList(){

@@ -7,6 +7,7 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import Models.Aluno;
 
 @Stateless
@@ -20,6 +21,22 @@ public class AlunoDao {
 		manager.flush();
 		
 	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Aluno editAlunos(Aluno aluno) throws Exception {
+        try
+        {
+        		manager.merge(aluno);
+        		manager.flush();
+        		return aluno;
+        }
+        catch(Exception e)
+        {
+            
+            System.out.println(e);
+            return null;
+        }
+    }
 	
 	public List<Aluno> listar(){
 		return manager.createQuery(
