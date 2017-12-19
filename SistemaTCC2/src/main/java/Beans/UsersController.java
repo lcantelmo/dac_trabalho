@@ -9,6 +9,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import DAO.UsersEJB;
@@ -26,6 +27,8 @@ public class UsersController {
     @EJB
     UsersEJB userEJB;
     
+    RedirectBean redirectBean = new RedirectBean();
+    
     private List<Usuario> userList = new ArrayList();
     
     public String LogIn() {
@@ -42,16 +45,10 @@ public class UsersController {
     				session.setAttribute("name",user.getName());
     				session.setAttribute("user_type",user.getUserType());
     				
-    				if(user.getUserType().equals("admin")) {
-    					return "/admin/homeAdmin.xhtml?faces-redirect=true";
-    				}else if (user.getUserType().equals("aluno")) {
-    					return "/aluno/homeAluno.xhtml?faces-redirect=true";
-    				}else if (user.getUserType().equals("prof")) {
-    					return "/professor/homeProfessor.xhtml?faces-redirect=true";
-    				}
+    				return redirectBean.goTo(user.getUserType());
     			}
     		}else {
-    			FacesMessage fm = new FacesMessage("usuário inexistente");
+    			FacesMessage fm = new FacesMessage("Usuário inexistente");
     			FacesContext.getCurrentInstance().addMessage("msg", fm);
     		}
 		return "/login?faces-redirect=true";

@@ -1,8 +1,7 @@
 package Beans;
 
-import java.util.List;
-
 import javax.inject.Named;
+
 import Models.Usuario;
 
 @Named
