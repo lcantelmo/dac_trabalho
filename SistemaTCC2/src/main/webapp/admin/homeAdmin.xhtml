@@ -9,7 +9,7 @@
 <h:head>
 
 	<meta charset="utf-8"/>
-	<h:title>Home Aluno</h:title>
+	<h:title>Home Administrador</h:title>
 
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:800" rel="stylesheet" />
 
@@ -82,7 +82,7 @@
 		</span>
 		
 		
-			<h:form style="float: right;">
+		<h:form style="float: right;">
 				<span style="float: right;">
 					<span style="font-size: 17px; padding-right: 200px;">
 						Bem-vindo(a) <h:outputText value="#{sessionScope.name}" /> 
@@ -100,16 +100,53 @@
 	
 	
 	
-	<div style="display: inline-block; width: 950px;">
+	<!-- <div style="color: #fff; margin-top: 100px; padding-left: 80px;" class="aplicar-fonte">
+		
+		<div style="float: left;">
+			<input placeholder="   Pesquisar..." style="margin-left: 5px; height: 30px; border: 0;" type="text" name="pesquisar" id="pesquisar" size="25" />
 			
+			<a href="#">
+				<img src="img/search.png" height="30px" style="margin-bottom: -11px; margin-left: -2px;"/>
+			</a>
+		</div> -->
+
+	<div style="display: inline-block; width: 950px; align: right">
 		<a href="#" style="text-decoration: none;" class="img-transparencia-001">
 			<div class="aplicar-fonte alinhar-hev" style="background-color: #38547B; width: 150px; display: inline-block; margin-left: 10px; padding-top: 10px; padding-bottom: 10px; margin-top: 65px; margin-bottom: -100px;" align="center">
 				+ Meus Dados
 			</div>
 		</a>
-		
 	</div>
 	
+	<div style="display: inline-block; width: 950px;">
+			
+		<a href="#" style="text-decoration: none;" class="img-transparencia-001">
+			<div class="aplicar-fonte alinhar-hev" style="background-color: #38547B; width: 150px; display: inline-block; margin-left: 10px; padding-top: 10px; padding-bottom: 10px; margin-top: 65px; margin-bottom: -100px;" align="center">
+				+ Projeto
+			</div>
+		</a>
+			
+		<a href="#" style="text-decoration: none;" class="img-transparencia-001">
+			<div class="aplicar-fonte alinhar-hev" style="background-color: #38547B; width: 150px; display: inline-block; margin-left: 10px; padding-top: 10px; padding-bottom: 10px; margin-top: -5px;" align="center">
+				+ Aluno
+			</div>
+		</a>
+			
+		<a href="#" style="text-decoration: none;" class="img-transparencia-001">
+			<div class="aplicar-fonte alinhar-hev" style="background-color: #38547B; width: 150px; display: inline-block; margin-left: 10px; padding-top: 10px; padding-bottom: 10px; margin-top: -5px;" align="center">
+				+ Professor
+			</div>
+		</a>
+			
+		<a href="#" style="text-decoration: none;" class="img-transparencia-001">
+			<div class="aplicar-fonte alinhar-hev" style="background-color: #38547B; width: 150px; display: inline-block; margin-left: 10px; padding-top: 10px; padding-bottom: 10px; margin-top: -5px;" align="center">
+				+ Administrador
+			</div>
+		</a>
+			
+	</div>
+		
+	<!-- </div>  -->
 	
 	<div style="top: 50%; left: 50%; margin-left: -200px; margin-top: 0px; position: absolute;">
 		<div style="width: 400px; background-color: #f0f;" align="center">
@@ -119,6 +156,5 @@
 			</div>
 		</div>
 	</div>
-
 </h:body>
 </html>

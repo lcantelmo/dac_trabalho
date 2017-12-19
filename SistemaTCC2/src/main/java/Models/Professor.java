@@ -1,8 +1,10 @@
 package Models;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
+@DiscriminatorValue("prof")
 public class Professor extends Usuario{
 	
 	/**

@@ -41,11 +41,11 @@ public class UsersController {
     				session.setAttribute("name",user.getName());
     				
     				if(user.getUserType().equals("admin")) {
-    					return "/home?faces-redirect=true";
+    					return "/admin/homeAdmin.xhtml?faces-redirect=true";
     				}else if (user.getUserType().equals("aluno")) {
     					return "/aluno/homeAluno.xhtml?faces-redirect=true";
     				}else if (user.getUserType().equals("prof")) {
-    					return "/professor?faces-redirect=true";
+    					return "/professor/homeProfessor.xhtml?faces-redirect=true";
     				}
     			}
     		}else {
@@ -106,7 +106,7 @@ public class UsersController {
         return "edit.xhtml";
     }
     public String editUser(){
-                System.out.println("--------------------1--------------------------------");
+        System.out.println("--------------------1--------------------------------");
         System.out.println("--------------------1--------------------------------");
         System.out.println(this.user.getId());
         System.out.println("--------------------1--------------------------------");
