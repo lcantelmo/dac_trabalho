@@ -19,12 +19,15 @@ public class RedirectBean {
     }
 
     public String goTo() {
-    		HttpSession session = SessionUtils.getSession();
+    	HttpSession session = SessionUtils.getSession();
 		String type = (String) session.getAttribute("user_type");
 		
-		if(type.equals("aluno")) {
+		if(type.equals("admin")) {
+			return "/admin/homeAdmin.xhtml?faces-redirect=true";
+		}else if (type.equals("aluno")) {
 			return "/aluno/homeAluno.xhtml?faces-redirect=true";
-		}
-		return "";
+		}else {
+			return "/professor/homeProfessor.xhtml?faces-redirect=true";
+    	}
     }
 }

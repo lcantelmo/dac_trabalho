@@ -32,6 +32,9 @@ public class ProjetoBean {
 	@Inject
 	private ProfessorDao professorDao;
 	
+	@Inject
+	private RedirectBean redirectBean;
+	
 	@Transactional
 	public void salvar() {
 		for(Long alunoId : alunosId) {
@@ -42,6 +45,9 @@ public class ProjetoBean {
 		}
 		dao.salvar(projeto);
 		System.out.println("Projeto Cadastrado" + projeto);
+		this.projeto = new Projeto();
+		this.alunosId = new ArrayList<>();
+		this.professoresId = new ArrayList<>();
 	}
 	
 	public List<Projeto> listar() {

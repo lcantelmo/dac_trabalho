@@ -123,7 +123,7 @@
 				<div style="padding-bottom: 20px;">
 				    <h:outputLabel value="Orientadores: " />
 				    <!--valores que serão recebidos após a seleção convertidos em Integer--> 
-				    <h:selectManyListbox value="#{projetoBean.professoresId}" converter="javax.faces.Integer" style="margin-left: 20px;" size="5" aria-required="true" aria-invalid="false" > 
+				    <h:selectManyListbox value="#{projetoBean.professoresId}" converter="javax.faces.Integer" style="margin-left: 20px;" size="5" aria-required="true" aria-invalid="false"> 
 				    	<!--valores que aparecerão na lista -->
 				        <f:selectItems value="#{projetoBean.professores}"
 				         var="professor"
@@ -133,23 +133,23 @@
 				</div>
 				<div  style="padding-bottom: 20px;">
 					<h:outputLabel value="Nota TCC1:"/>
-					<h:inputText value="#{projetoBean.projeto.nota_tcc1}" converter="javax.faces.Float" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
+					<h:inputText value="#{projetoBean.projeto.nota_tcc1}" converter="javax.faces.Float" style="margin-left: 20px;" size="28"/>
 				</div>
 				<div  style="padding-bottom: 20px;">
 					<h:outputLabel value="Nota TCC2:"/>
-					<h:inputText value="#{projetoBean.projeto.nota_tcc2}" converter="javax.faces.Float" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
+					<h:inputText value="#{projetoBean.projeto.nota_tcc2}" converter="javax.faces.Float" style="margin-left: 20px;" size="28"/>
 				</div>
 				<div  style="padding-bottom: 20px;">
 					<h:outputLabel value="Local Defesa:"/>
-					<h:inputText value="#{projetoBean.projeto.local}" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
+					<h:inputText value="#{projetoBean.projeto.local}" style="margin-left: 20px;" size="28"/>
 				</div>
 				<div  style="padding-bottom: 20px;">
 					<h:outputLabel value="Versão Parcial:" />
-					<h:inputText value="#{projetoBean.projeto.versoesParciais}" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false"/>
+					<h:inputText value="#{projetoBean.projeto.versoesParciais}" style="margin-left: 20px;" size="28"/>
 				</div>
 				<div  style="padding-bottom: 20px;">
 					<h:outputLabel value="Versão Final:"/>
-					<h:inputText value="#{projetoBean.projeto.versaoFinal}" converter="javax.faces.Integer" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
+					<h:inputText value="#{projetoBean.projeto.versaoFinal}" converter="javax.faces.Integer" style="margin-left: 20px;" size="28"/>
 				</div>
 				<div align="right" style="padding-right: 90px; padding-bottom: 25px; padding-top: 20px;">
 					<h:commandButton style="color: #000;" value="Criar" action="#{projetoBean.salvar}"/>

@@ -31,10 +31,13 @@ public class AlunoBean {
 		try {
 			dao.salvar(aluno);
 			context.addMessage(null, new FacesMessage("Aluno Cadastrado"));
+			System.out.println("Aluno Cadastrado" + aluno);
+			this.aluno = new Aluno();
 		} catch (Exception e) {
 			context.addMessage(null, new FacesMessage("Aluno não cadastrado"));
 			System.out.println("Erro:   "+e.getStackTrace());
 		}
+		
 		return null;
 	}
 	
