@@ -7,29 +7,31 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import Models.Aluno;
+
+import Models.Administrador;
 
 @Stateless
-public class AlunoDao {
+public class AdminDao {
+	
 	@PersistenceContext
 	private EntityManager manager;
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void salvar(Aluno aluno) {
-		manager.persist(aluno);
+	public void salvar(Administrador admin) {
+		manager.persist(admin);
 		manager.flush();
 		
 	}
 	
-	public List<Aluno> listar(){
+	public List<Administrador> listar(){
 		return manager.createQuery(
-				"select a from Aluno a", Aluno.class)
+				"select a from Administradro a", Administrador.class)
 				.getResultList();
 	}
 	
-	public Aluno buscaPeloId(Integer id){
+	public Administrador buscaPeloId(Integer id){
 		return manager.createQuery(
-				"select p from Professor p where p.id=?1", Aluno.class)
+				"select p from Administradro p where p.id=?1", Administrador.class)
 				.setParameter(1, id)
 				.getSingleResult();
 	}

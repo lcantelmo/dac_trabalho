@@ -2,17 +2,23 @@ package DAO;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import Models.Professor;
 
+@Stateless
 public class ProfessorDao {
 	
 	@PersistenceContext
 	private EntityManager manager;
 	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void salvar(Professor professor) {
 		manager.persist(professor);
+		manager.flush();
 	}
 	
 	public List<Professor> listar(){

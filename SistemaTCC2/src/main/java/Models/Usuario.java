@@ -70,7 +70,7 @@ public class Usuario implements Serializable {
         return name;
     }
 
-    public void setUserName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 

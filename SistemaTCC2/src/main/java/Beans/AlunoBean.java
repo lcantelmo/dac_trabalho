@@ -1,14 +1,17 @@
 package Beans;
 
 import java.util.List;
-import javax.enterprise.context.RequestScoped;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.transaction.Transactional;
+
 import DAO.AlunoDao;
 import Models.Aluno;
 
-@Named
+@ManagedBean
 @RequestScoped
 public class AlunoBean {
 	private Aluno aluno = new Aluno();
@@ -16,10 +19,19 @@ public class AlunoBean {
 	@Inject
 	private AlunoDao dao;
 	
-	@Transactional
+	
 	public void salvar() {
-		dao.salvar(aluno);
-		System.out.println("Aluno Cadastrado: " + aluno);
+		aluno.setUserType("aluno");
+		try {
+			dao.salvar(aluno);
+			FacesMessage fm = new FacesMessage("Aluno Cadastrado");
+			FacesContext.getCurrentInstance().addMessage("msg", fm);
+			
+		} catch (Exception e) {
+			FacesMessage fm = new FacesMessage("Aluno não cadastrado");
+			FacesContext.getCurrentInstance().addMessage("msg", fm);
+			System.out.println("Erro:   "+e.getStackTrace());
+		}
 	}
 	
 	public List<Aluno> listar() {

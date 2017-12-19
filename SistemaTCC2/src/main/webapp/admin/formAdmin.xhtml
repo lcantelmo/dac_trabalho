@@ -84,7 +84,7 @@
 	class="aplicar-fonte" align="center">
 		
 		<div class="aplicar-fonte" style="background-color: #38547B; width: 600px; padding-top: 10px; padding-bottom: 10px; padding-left: 30px; margin-top: -5px;" align="left">
-				+ Aluno
+				+ Admin
 		</div>
 		<h:form>
 			<div class="aplicar-fonte" style="background-color: #fff; width: 400px; color: #000;
@@ -92,22 +92,22 @@
 		
 				<div style="padding-bottom: 20px;">
 					<h:outputLabel value="Nome:"/>
-		    			<h:inputText value="#{alunoBean.aluno.name}" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
+		    			<h:inputText value="#{adminBean.administrador.name}" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
 				</div>	
 				
 				<div style="padding-bottom: 20px;">
 					<h:outputLabel value="Matrícula:"/>
-	    				<h:inputText value="#{alunoBean.aluno.matricula}" style="margin-left: 24px;"  size="23" aria-required="true" aria-invalid="false" />
+	    				<h:inputText value="#{adminBean.administrador.matricula}" style="margin-left: 24px;"  size="23" aria-required="true" aria-invalid="false" />
 				</div>
 				
 				<div style="padding-bottom: 20px;">
 					<h:outputLabel value="Email:"/>
-	    				<h:inputText value="#{alunoBean.aluno.email}" style="margin-left: 25px;" type="text"  size="27" aria-required="true" aria-invalid="false" />
+	    				<h:inputText value="#{adminBean.administrador.email}" style="margin-left: 25px;" type="text"  size="27" aria-required="true" aria-invalid="false" />
 				</div>
 				
 				<div style="padding-bottom: 20px;">
 					<h:outputLabel value="Senha:"/>
-	    		<h:inputSecret value="#{alunoBean.aluno.password}" style="margin-left: 25px;" type="text"  size="27" aria-required="true" aria-invalid="false" />
+	    		<h:inputSecret value="#{adminBean.administrador.password}" style="margin-left: 25px;" type="text"  size="27" aria-required="true" aria-invalid="false" />
 				</div>
 				
 				<div style="padding-bottom: 40px;">
@@ -116,7 +116,7 @@
 				</div>
 				
 				<div align="right" style="padding-right: 90px; padding-bottom: 25px; padding-top: 20px;">
-						<h:commandButton style="color: #000;" value="Criar" action="#{alunoBean.salvar()}"/>
+						<h:commandButton style="color: #000;" value="Criar" action="#{adminBean.salvar()}"/>
 				</div>
 			
 			</div>

@@ -8,41 +8,42 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import DAO.ProfessorDao;
-import Models.Professor;
+import DAO.AdminDao;
+import Models.Administrador;
 
 @ManagedBean
 @RequestScoped
-public class ProfessorBean {
-	
-	private Professor professor = new Professor();
+public class AdminBean {
+	private Administrador admin = new Administrador();
 	
 	@Inject
-	private ProfessorDao dao;
+	private AdminDao dao;
+	
 	
 	public void salvar() {
-		getProfessor().setUserType("prof");
+		admin.setUserType("admin");
 		try {
-			dao.salvar(getProfessor());
-			FacesMessage fm = new FacesMessage("Professor Cadastrado");
+			dao.salvar(admin);
+			FacesMessage fm = new FacesMessage("Administrador Cadastrado");
 			FacesContext.getCurrentInstance().addMessage("msg", fm);
 			
 		} catch (Exception e) {
-			FacesMessage fm = new FacesMessage("Professor não cadastrado");
+			FacesMessage fm = new FacesMessage("Administrador não cadastrado");
 			FacesContext.getCurrentInstance().addMessage("msg", fm);
 			System.out.println("Erro:   "+e.getStackTrace());
 		}
 	}
 	
-	public List<Professor> listar() {
+	public List<Administrador> listar() {
 		return dao.listar();
 	}
 
-	public Professor getProfessor() {
-		return professor;
+	public Administrador getAdministrador() {
+		return admin;
 	}
 
-	public void setProfessor(Professor professor) {
-		this.professor = professor;
+	public void setAdministrador(Administrador admin) {
+		this.admin = admin;
 	}
+	
 }
