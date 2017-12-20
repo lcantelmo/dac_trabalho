@@ -2,11 +2,11 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core" >
+
 <h:head>
 
 	<meta charset="utf-8"/>
-	<h:title>Cadastrar Administrador</h:title>
-
+	<h:title>Meus Dados</h:title>
 
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:800" rel="stylesheet"/>
 
@@ -68,74 +68,66 @@
 </h:head>
 <h:body style="background-color:#E9EBEE;">
 
-	<div style="width: 100%; background-color: #38547B; top: 0%; left: 0%; position: absolute; color: #fff; padding-top: 15px; padding-bottom: 15px;"
+<div style="width: 100%; background-color: #38547B; top: 0%; left: 0%; position: absolute; color: #fff; padding-top: 15px; padding-bottom: 15px;"
 	class="aplicar-fonte">
-	<h:form>
-		<span style="font-size: 19px; padding-left: 30px;">
-				<h:commandLink id="botaoSaibaMais" style="width: 120px;" align="center" 
-								 action="#{redirect.goTo()}">
-								Sistema de TCC's 
+		<h:form>
+			<span style="font-size: 19px; padding-left: 30px;">
+				<h:commandLink id="botaoSaibaMais" style="width: 120px;" align="center" action="#{redirect.goTo()}">
+					Sistema de TCC's 
 				</h:commandLink>
-		</span>
-				<span style="float: right;">
-					<span style="font-size: 17px; padding-right: 200px;">
-						Bem-vindo(a) <h:outputText value="#{sessionScope.name}" /> 
-					</span>
-			
-					<span style="font-size: 17px;padding-right: 20px;">
-						<h:commandLink value="Sair" action="#{users.logOut}">
-							<h:graphicImage value="../images/icon-logout.png" height="25px" style="margin-bottom: -7px;"/>
-						</h:commandLink>
-					</span>
+			</span>
+			<span style="float: right;">
+				<span style="font-size: 17px; padding-right: 200px;">
+					Bem-vindo(a) <h:outputText value="#{sessionScope.name}" /> 
 				</span>
+				
+				<span style="font-size: 17px;padding-right: 20px;">
+					<h:commandLink value="Sair" action="#{users.logOut}">
+						<h:graphicImage value="images/icon-logout.png" height="25px" style="margin-bottom: -7px;"/>
+					</h:commandLink>
+				</span>
+			</span>
 		</h:form>
-		
 	</div>
 	
-	<div style="color: #fff; margin-top: 100px; padding-left: 0px;"
-	class="aplicar-fonte" align="center">
+	<div style="color: #fff; margin-top: 100px; padding-left: 0px;" class="aplicar-fonte" align="center">
 		
 		<div class="aplicar-fonte" style="background-color: #38547B; width: 600px; padding-top: 10px; padding-bottom: 10px; padding-left: 30px; margin-top: -5px;" align="left">
-				+ Admin
+				+ Meus Dados
 		</div>
+		
 		<h:form>
 			<div class="aplicar-fonte" style="background-color: #fff; width: 400px; color: #000;
 			padding-left: 100px; padding-top: 40px;" align="left">
 		
 				<div style="padding-bottom: 20px;">
 					<h:outputLabel value="Nome:"/>
-		    		<h:inputText value="#{adminBean.administrador.name}" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
+		    		<h:inputText value="#" style="margin-left: 20px;" size="28"/>
 				</div>	
 				
 				<div style="padding-bottom: 20px;">
 					<h:outputLabel value="Matrícula:"/>
-	    				<h:inputText value="#{adminBean.administrador.matricula}" style="margin-left: 24px;"  size="23" aria-required="true" aria-invalid="false" />
+	    			<h:inputText value="#" style="margin-left: 24px;"  size="23"/>
 				</div>
 				
 				<div style="padding-bottom: 20px;">
 					<h:outputLabel value="Email:"/>
-	    				<h:inputText value="#{adminBean.administrador.email}" style="margin-left: 25px;" type="text"  size="27" aria-required="true" aria-invalid="false" />
-				</div>
-				
-				<div style="padding-bottom: 20px;">
-					<h:outputLabel value="Senha:"/>
-	    		<h:inputSecret value="#{adminBean.administrador.password}" style="margin-left: 25px;" type="text"  size="27" aria-required="true" aria-invalid="false" />
-				</div>
-				
-				<div style="padding-bottom: 40px;">
-					<h:outputLabel value="Confirmar Senha:"/>
-	    				<h:inputSecret style="margin-left: 20px;" type="text"  size="15" aria-required="true" aria-invalid="false" />
+	    			<h:inputText value="#" style="margin-left: 25px;" type="text"  size="27"/>
 				</div>
 				
 				<div align="right" style="padding-right: 90px; padding-bottom: 25px; padding-top: 20px;">
-						<h:commandButton style="color: #000;" value="Criar" action="#{adminBean.salvar()}"/>
+					<h:commandButton value="SALVAR" action="#" style="color: #000;"/>
 				</div>
-			
+				<h:messages style="color: red"/>
 			</div>
 		</h:form>
 	</div>
-	
-	
-
+	<div style="display: inline-block; width: 950px;">	
+		<a href="alterarSenha.xhtml?faces-redirect=true" style="text-decoration: none;" class="img-transparencia-001">
+			<div class="aplicar-fonte alinhar-hev" style="background-color: #38547B; width: 150px; display: inline-block; margin-left: 10px; padding-top: 10px; padding-bottom: 10px; margin-top: 65px; margin-bottom: -100px;" align="center">
+				+ Senha
+			</div>
+		</a>
+	</div>
 </h:body>
 </html>
