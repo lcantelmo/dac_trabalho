@@ -5,7 +5,7 @@
 <h:head>
 
 	<meta charset="utf-8"/>
-	<h:title>Cadastrar aluno</h:title>
+	<h:title>Cadastrar Administrador</h:title>
 
 
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:800" rel="stylesheet"/>
@@ -66,21 +66,63 @@
 		.linha-da-tabela:hover{
 			background-color: #e9ebee !important;
 		}
+		.order-table{
+			background-color: #fff;
+			 color: #000; 
+			 font-weight: 600;
+			width: 95%;
+		}
+		
+		.order-table-header{
+			background-color: #38547B !important;
+			color: #fff !important;
+			font-weight: 700;
+			border:1px solid #000;
+			text-align:center;
+			width: 220px;
+		}
+		
+		.order-table-odd-row{
+			border: 1px solid #000;
+			padding-left: 5px;
+			text-align:left;
+			background:none repeat scroll 0 0 #FFFFFFF;
+			
+		}
+		
+		.order-table-even-row{
+			border: 1px solid #000;
+			text-align:left;
+			background:none repeat scroll 0 0 #F9F9F9;
+		}
 	
 	</style>
 		
 </h:head>
 <h:body style="background-color:#E9EBEE;">
 
-	<div style="width: 100%; background-color: #38547B; top: 0%; left: 0%; position: absolute; color: #fff; padding-top: 15px; padding-bottom: 15px;"
-	class="aplicar-fonte">
+	<div style="width: 100%; background-color: #38547B; top: 0%; left: 0%; position: absolute;
+	 color: #fff; padding-top: 15px; padding-bottom: 15px;" class="aplicar-fonte">
 		
+		<h:form>
 		<span style="font-size: 19px; padding-left: 30px;">
-			<a href="#">
-				Sistema de TCC's
-			</a>
+				<h:commandLink id="botaoSaibaMais" style="width: 120px;" align="center" 
+								 action="#{redirect.goTo()}">
+								Sistema de TCC's 
+				</h:commandLink>
 		</span>
-		
+				<span style="float: right;">
+					<span style="font-size: 17px; padding-right: 200px;">
+						Bem-vindo(a) <h:outputText value="#{sessionScope.name}" /> 
+					</span>
+			
+					<span style="font-size: 17px;padding-right: 20px;">
+						<h:commandLink value="Sair" action="#{users.logOut}">
+							<h:graphicImage value="../images/icon-logout.png" height="25px" style="margin-bottom: -7px;"/>
+						</h:commandLink>
+					</span>
+				</span>
+		</h:form>
 		
 	</div>
 	
@@ -90,9 +132,9 @@
 		<div class="aplicar-fonte" style="background-color: #38547B; width: 600px; padding-top: 10px; padding-bottom: 10px; padding-left: 30px; margin-top: -5px;" align="left">
 				+ Admin
 		</div>
-		<h:form>
 			<div class="aplicar-fonte" style="background-color: #fff; width: 400px; color: #000;
 			padding-left: 100px; padding-top: 40px;" align="left">
+		<h:form>
 		
 				<div style="padding-bottom: 20px;">
 					<h:outputLabel value="Nome:"/>
@@ -111,23 +153,66 @@
 				
 				<div style="padding-bottom: 20px;">
 					<h:outputLabel value="Senha:"/>
-	    		<h:inputSecret value="#{adminBean.administrador.password}" style="margin-left: 25px;" type="text"  size="27" aria-required="true" aria-invalid="false" />
+		    		<h:inputSecret value="#{adminBean.administrador.password}" style="margin-left: 25px;" type="text"  size="27" aria-required="true" aria-invalid="false" />
 				</div>
 				
 				<div style="padding-bottom: 40px;">
 					<h:outputLabel value="Confirmar Senha:"/>
 	    				<h:inputSecret style="margin-left: 20px;" type="text"  size="15" aria-required="true" aria-invalid="false" />
 				</div>
-				
-				<div align="right" style="padding-right: 90px; padding-bottom: 25px; padding-top: 20px;">
-						<h:commandButton style="color: #000;" value="Criar" action="#{adminBean.salvar()}"/>
+				<div align="right" style="padding-right: 90px; padding-bottom: 25px; padding-top: 20px;color: black; background-color: #fff;">
+						<h:commandLink style="color: black;background-color: #fff;" value="SALVAR" action="#{adminBean.salvar()}"/>
 				</div>
-			
+				
+			</h:form>
+				<h:messages/>
 			</div>
-		</h:form>
+		<div class="aplicar-fonte" style="width: 810px; padding-top: 10px; padding-bottom: 10px; padding-left: 0px; margin-top: 20px;" align="left">
+				<input placeholder="   Pesquisar..." style="margin-left: 5px; height: 30px; border: 0;" type="text" name="pesquisar" id="pesquisar" size="25" />
+			
+			<a href="#">
+				<img src="images/search.png" height="30px" style="margin-bottom: -11px; margin-left: -2px;" />
+			</a>
+		</div>
+		
+		<div class="aplicar-fonte" style="width: 900px; padding-top: 10px; padding-bottom: 10px; padding-left: 100px; margin-top: 0px;" align="left">
+		 <!-- <p:accordionPanel activeIndex="0" autoHeight="false"> -->  	
+		<h:form>
+			<h:dataTable binding="#{adminBean.dataTable}" value="#{adminBean.listar()}" var="admin"  cellspacing="0" 
+			styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row">
+    				
+	    			<h:column >
+	    				<f:facet name="header" >Nome</f:facet>
+	    				<h:inputText style="color: black; width: 220px" value="#{admin.name}" >
+	    					<!-- <g:ajax event="keyup" update="out1" /> -->
+	    				</h:inputText>
+	    			</h:column>
+	
+	    			<h:column >
+	    				<f:facet name="header">Matrícula</f:facet>
+	    				<h:inputText  style="color: black; width: 220px" value="#{admin.matricula}" />
+	    			</h:column>
+	    			<h:column >
+	    				<f:facet name="header" >Email</f:facet>
+	    				<h:inputText style="color: black; width: 220px" value="#{admin.email}" />
+	    			</h:column>
+	    			<h:column >
+	    				<f:facet name="header" class="linha-da-tabela">ID</f:facet>
+	    				 <h:outputText style="color: black; width: 220px" value="#{admin.id}" />
+	    			</h:column>
+    				<h:column >
+	    					<h:commandButton value="Alterar" style="color: black; width=25px"
+      				 	action="#{adminBean.alterarLinha()}" />
+    				</h:column>
+    				<h:column >
+	    					<h:commandLink value="Excluir" style="color: black; width=25px"
+      				 	action="#{adminBean.excluirLinha()}" />
+    				</h:column>
+			</h:dataTable>
+		  </h:form>
+		</div>
 	</div>
-	
-	
-
 </h:body>
 </html>

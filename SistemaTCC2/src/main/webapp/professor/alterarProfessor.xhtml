@@ -8,7 +8,7 @@
 <h:head>
 
 	<meta charset="utf-8"/>
-	<h:title>Cadastrar aluno</h:title>
+	<h:title>Cadastrar Professor</h:title>
 
 
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:800" rel="stylesheet"/>
@@ -122,13 +122,13 @@
 				</span>
 		</h:form>
 		
-	</div>FacesContext context = FacesContext.getCurrentInstance();
+	</div>
 	
 	<div style="color: #fff; margin-top: 100px; padding-left: 0px;"
 	class="aplicar-fonte" align="center">
 		
 		<div class="aplicar-fonte" style="background-color: #38547B; width: 600px; padding-top: 10px; padding-bottom: 10px; padding-left: 30px; margin-top: -5px;" align="left">
-				+ Aluno
+				+ Professor
 		</div>
 			<div class="aplicar-fonte" style="background-color: #fff; width: 400px; color: #000;
 			padding-left: 100px; padding-top: 40px;" align="left">
@@ -136,22 +136,22 @@
 			<h:form>
 				<div style="padding-bottom: 20px;">
 					<h:outputLabel value="Nome:"/>
-		    			<h:inputText value="#{alunoBean.aluno.name}" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
+		    			<h:inputText value="#{professorBean.professor.name}" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
 				</div>	
 				
 				<div style="padding-bottom: 20px;">
 					<h:outputLabel value="Matrícula:"/>
-	    				<h:inputText value="#{alunoBean.aluno.matricula}" style="margin-left: 24px;"  size="23" aria-required="true" aria-invalid="false" />
+	    				<h:inputText value="#{professorBean.professor.matricula}" style="margin-left: 24px;"  size="23" aria-required="true" aria-invalid="false" />
 				</div>
 				
 				<div style="padding-bottom: 20px;">
 					<h:outputLabel value="Email:"/>
-	    				<h:inputText value="#{alunoBean.aluno.email}" style="margin-left: 25px;" type="text"  size="27" aria-required="true" aria-invalid="false" />
+	    				<h:inputText value="#{professorBean.professor.email}" style="margin-left: 25px;" type="text"  size="27" aria-required="true" aria-invalid="false" />
 				</div>
 				
 				<div style="padding-bottom: 20px;">
 					<h:outputLabel value="Senha:"/>
-	    		<h:inputSecret value="#{alunoBean.aluno.password}" style="margin-left: 25px;" type="text"  size="27" aria-required="true" aria-invalid="false" />
+	    		<h:inputSecret value="#{professorBean.professor.password}" style="margin-left: 25px;" type="text"  size="27" aria-required="true" aria-invalid="false" />
 				</div>
 				
 				<div style="padding-bottom: 40px;">
@@ -161,12 +161,12 @@
 				
 				<div align="right" style="padding-right: 90px; padding-bottom: 25px; padding-top: 20px;color: black; background-color: #fff;">
 						<!-- a href="#" style="color: #000; padding-right: 115px;">LIMPAR</a> -->
-						<h:commandLink style="color: black;background-color: #fff;" value="SALVAR" action="#{alunoBean.salvar()}"/>
+						<h:commandLink style="color: black;background-color: #fff;" value="SALVAR" action="#{professorBean.salvar()}"/>
 				</div>
 				
-				</h:form>
-			</div>
+			</h:form>
 				<h:messages/>
+			</div>
 		<div class="aplicar-fonte" style="width: 810px; padding-top: 10px; padding-bottom: 10px; padding-left: 0px; margin-top: 20px;" align="left">
 				<input placeholder="   Pesquisar..." style="margin-left: 5px; height: 30px; border: 0;" type="text" name="pesquisar" id="pesquisar" size="25" />
 			
@@ -178,37 +178,37 @@
 		<div class="aplicar-fonte" style="width: 900px; padding-top: 10px; padding-bottom: 10px; padding-left: 100px; margin-top: 0px;" align="left">
 		 <!-- <p:accordionPanel activeIndex="0" autoHeight="false"> -->  	
 		<l:form>
-			<l:dataTable binding="#{alunoBean.dataTable}" value="#{alunoBean.listar()}" var="aluno"  cellspacing="0" 
+			<l:dataTable binding="#{professorBean.dataTable}" value="#{professorBean.listar()}" var="professor"  cellspacing="0" 
 			styleClass="order-table"
     			headerClass="order-table-header"
     			rowClasses="order-table-odd-row,order-table-even-row">
     				
 	    			<l:column >
 	    				<f:facet name="header" >Nome</f:facet>
-	    				<l:inputText style="color: black; width: 220px" value="#{aluno.name}" >
+	    				<l:inputText style="color: black; width: 220px" value="#{professor.name}" >
 	    					<g:ajax event="keyup" update="out1" />
 	    				</l:inputText>
 	    			</l:column>
 	
 	    			<l:column >
 	    				<f:facet name="header">Matrícula</f:facet>
-	    				<l:inputText  style="color: black; width: 220px" value="#{aluno.matricula}" />
+	    				<l:inputText  style="color: black; width: 220px" value="#{professor.matricula}" />
 	    			</l:column>
 	    			<l:column >
 	    				<f:facet name="header" >Email</f:facet>
-	    				<l:inputText style="color: black; width: 220px" value="#{aluno.email}" />
+	    				<l:inputText style="color: black; width: 220px" value="#{professor.email}" />
 	    			</l:column>
 	    			<l:column >
 	    				<f:facet name="header" class="linha-da-tabela">ID</f:facet>
-	    				 <l:outputText style="color: black; width: 220px" value="#{aluno.id}" />
+	    				 <l:outputText style="color: black; width: 220px" value="#{professor.id}" />
 	    			</l:column>
     				<l:column >
 	    					<l:commandButton value="Alterar" style="color: black; width=25px"
-      				 	action="#{alunoBean.alterarLinha()}" />
+      				 	action="#{professorBean.alterarLinha()}" />
     				</l:column>
     				<l:column >
 	    					<l:commandLink value="Excluir" style="color: black; width=25px"
-      				 	action="#{alunoBean.excluirLinha()}" />
+      				 	action="#{professorBean.excluirLinha()}" />
     				</l:column>
 			</l:dataTable>
 		  </l:form>

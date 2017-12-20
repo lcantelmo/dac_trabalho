@@ -1,8 +1,7 @@
 package Beans;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.SessionScoped;
 import javax.servlet.http.HttpSession;
 
 import utils.SessionUtils;
@@ -11,9 +10,8 @@ import utils.SessionUtils;
  * Session Bean implementation class RedirectBean
  */
 @ManagedBean(name="redirect")
-@RequestScoped
+@SessionScoped
 public class RedirectBean {
-	FacesContext context = FacesContext.getCurrentInstance();
 	
     public RedirectBean() {
     }
@@ -21,7 +19,8 @@ public class RedirectBean {
     public String goTo() {
     	HttpSession session = SessionUtils.getSession();
 		String type = (String) session.getAttribute("user_type");
-		
+		if (type == null )
+			return "/login.xhtml?faces-redirect-true";
 		if(type.equals("admin")) {
 			return "/admin/homeAdmin.xhtml?faces-redirect=true";
 		}else if (type.equals("aluno")) {
