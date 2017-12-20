@@ -1,18 +1,22 @@
 package Beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import DAO.AlunoDao;
 import Models.Aluno;
+import Models.Usuario;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class AlunoBean {
 	private Aluno aluno = new Aluno();
 	  FacesContext context = FacesContext.getCurrentInstance();
@@ -20,9 +24,15 @@ public class AlunoBean {
 	@Inject
 	private AlunoDao dao;
 	
+<<<<<<< Updated upstream
 	@Inject
 	private RedirectBean redirectBean;
 	
+=======
+	private HtmlDataTable dataTable;
+	   
+	private  List<Aluno> listaAlunos = new ArrayList<Aluno>();
+>>>>>>> Stashed changes
 	
 	public String salvar() {
 		aluno.setUserType("aluno");
@@ -48,6 +58,7 @@ public class AlunoBean {
 		return null;
 	}
 	
+<<<<<<< Updated upstream
 	public String salvarNovoUsuario() {
 		aluno.setUserType("aluno");
 		if(!this.aluno.getEmail().contains("@") || !this.aluno.getEmail().contains("."))
@@ -80,22 +91,65 @@ public class AlunoBean {
 		}
 	}
 	public String alterar() {
+=======
+	public String alterar(Aluno aluno) {
+>>>>>>> Stashed changes
 		 
-		if(!this.aluno.getEmail().contains("@") || !this.aluno.getEmail().contains("."))
+		if(!aluno.getEmail().contains("@") || !aluno.getEmail().contains("."))
 	        {
-	            context.addMessage(null, new FacesMessage("Invalid email"));
+	            context.addMessage(null, new FacesMessage("Email inválido"));
 	            return null;
 	        }
 		try {
-			dao.editAlunos(this.aluno);
+			dao.editAlunos(aluno);
 		} catch (Exception e) {
 			context.addMessage(null, new FacesMessage("Não foi possível alterar aluno"+e));
 		}
 		return null;
 	}
 	
+	public void alterarLinha() {
+		Aluno alunoSelecionado = (Aluno) dataTable.getRowData();
+		Aluno alunoSalvo = null ;
+        System.out.println("Aluno Selecionada  = "+alunoSelecionado.getId() + "|" + alunoSelecionado.getName());
+        
+        if(listaAlunos != null) {
+        	 alunoSalvo	= listaAlunos.get(dataTable.getRowIndex());
+        }
+        if(alunoSalvo!= null && !comparaAlunoALterado(alunoSalvo, alunoSelecionado)) {
+        		alterar(alunoSelecionado);
+        }else {
+        	FacesMessage fm = new FacesMessage("Nenhuma mudança");
+			FacesContext.getCurrentInstance().addMessage("msg", fm);
+        }
+	}
+	
+	private boolean comparaAlunoALterado(Aluno alunoSalvo, Aluno alunoSelecionado) {
+			return alunoSalvo.getEmail().equals(alunoSelecionado.getEmail()) &&
+					alunoSalvo.getMatricula().equals(alunoSelecionado.getMatricula()) &&
+					alunoSalvo.getName().equals(alunoSelecionado.getName()) &&
+					alunoSalvo.getUserType().equals(alunoSelecionado.getUserType());
+	}
+
+	public String excluirLinha() {
+		Aluno alunoSelecionado = (Aluno) dataTable.getRowData();
+		try {
+			dao.deleteAluno(dao.buscaPeloId(alunoSelecionado.getId()));
+			this.listaAlunos = dao.listar();
+			context.addMessage(null, new FacesMessage("Aluno excluído"));
+			return "/aluno/alterarAluno.xhtml?faces-redirect=true";
+		}
+		catch(Exception e)
+		{
+			context.addMessage(null, new FacesMessage("Não foi possível excluir aluno"+e));
+			return null;
+		}
+	}
+	
+            
 	public List<Aluno> listar() {
-		return dao.listar();
+		this.listaAlunos = dao.listar();
+		return this.listaAlunos;
 	}
 
 	public Aluno getAluno() {
@@ -105,5 +159,12 @@ public class AlunoBean {
 	public void setAluno(Aluno aluno) {
 		this.aluno = aluno;
 	}
+	public HtmlDataTable getDataTable() {
+		return dataTable;
+	}
+	
+	public void setDataTable(HtmlDataTable dataTable) {
+		this.dataTable = dataTable;
+	}            
 	
 }

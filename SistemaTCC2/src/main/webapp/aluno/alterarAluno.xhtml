@@ -1,7 +1,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core" >
+	xmlns:f="http://xmlns.jcp.org/jsf/core" 
+	xmlns:l="http://java.sun.com/jsf/html"
+	xmlns:g="http://java.sun.com/jsf/core" >
+	
 <h:head>
 
 	<meta charset="utf-8"/>
@@ -61,6 +64,35 @@
 			-moz-transition: 0.25s ease-out;
 			-o-transition: 0.25s ease-out;
 			transition: 0.25s ease-out;
+		}
+		.order-table{
+			background-color: #fff;
+			 color: #000; 
+			 font-weight: 600;
+			width: 95%;
+		}
+		
+		.order-table-header{
+			background-color: #38547B !important;
+			color: #fff !important;
+			font-weight: 700;
+			border:1px solid #000;
+			text-align:center;
+			width: 220px;
+		}
+		
+		.order-table-odd-row{
+			border: 1px solid #000;
+			padding-left: 5px;
+			text-align:left;
+			background:none repeat scroll 0 0 #FFFFFFF;
+			
+		}
+		
+		.order-table-even-row{
+			border: 1px solid #000;
+			text-align:left;
+			background:none repeat scroll 0 0 #F9F9F9;
 		}
 	
 	</style>
@@ -128,11 +160,13 @@
 	    				<h:inputSecret style="margin-left: 20px;" type="text"  size="15" aria-required="true" aria-invalid="false" />
 				</div>
 				
-				<div align="right" style="padding-right: 90px; padding-bottom: 25px; padding-top: 20px;">
-					<!-- a href="#" style="color: #000; padding-right: 115px;">LIMPAR</a> -->
-					<a href="#" style="color: #000; padding-right: 40px;">EXCLUIR</a>
-					<a href="#" style="color: #000;">SALVAR</a>
+				<div align="right" style="padding-right: 90px; padding-bottom: 25px; padding-top: 20px;color: black; background-color: #fff;">
+					<h:form>
+						<!-- a href="#" style="color: #000; padding-right: 115px;">LIMPAR</a> -->
+						<h:commandLink style="color: black;background-color: #fff;" value="SALVAR" action="#{alunoBean.alterar()}"/>
+					</h:form>
 				</div>
+				<h:messages/>
 				
 			</div>
 		</h:form>
@@ -145,49 +179,42 @@
 		</div>
 		
 		<div class="aplicar-fonte" style="width: 900px; padding-top: 10px; padding-bottom: 10px; padding-left: 100px; margin-top: 0px;" align="left">
-			<h:dataTable value="#{order.orderList}" var="o"  cellspacing="0" cellpadding="0" style="background-color: #fff; color: #000; font-weight: 600;">
+		 <!-- <p:accordionPanel activeIndex="0" autoHeight="false"> -->  	
+		<l:form>
+			<l:dataTable binding="#{alunoBean.dataTable}" value="#{alunoBean.listar()}" var="aluno"  cellspacing="0" 
+			styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row">
+    				
+	    			<l:column >
+	    				<f:facet name="header" >Nome</f:facet>
+	    				<l:inputText style="color: black; width: 220px" value="#{aluno.name}" >
+	    					<g:ajax event="keyup" update="out1" />
+	    				</l:inputText>
+	    			</l:column>
 	
-	    			<h:column style="background-color: #38547B !important; color: #fff !important;">
-	    				<!-- column header -->
-	    				<f:facet name="header" width="100px" style="font-weight: 700; border:1px solid #000; padding-left: 5px;">Nome</f:facet>
-	    				<!-- row record -->
-	    				#{o.name}
-	    			</h:column>
-	
-	    			<h:column>
-	    				<f:facet name="header" width="100px" style="font-weight: 700; border:1px solid #000; padding-left: 5px;">Product Name</f:facet>
-	    				#{o.productName}
-	    			</h:column>
-	
-	    			<h:column>
-	    				<f:facet name="header" width="100px" style="font-weight: 700; border:1px solid #000; padding-left: 5px;">Price</f:facet>
-	    				#{o.price}
-	    			</h:column>
-	
-	    			<h:column>
-	    				<f:facet name="header" width="100px" style="font-weight: 700; border:1px solid #000; padding-left: 5px;">Quantity</f:facet>
-	    				#{o.qty}
-	    			</h:column>
-			</h:dataTable>
-				<!-- <tr style="background-color: #38547B !important; color: #fff !important;">
-					<td width="100px" style="font-weight: 700; border:1px solid #000; padding-left: 5px;">ID</td>
-					<td width="400px" style="font-weight: 700; border:1px solid #000; padding-left: 5px;">Nome</td>
-					<td width="200px" style="font-weight: 700; border:1px solid #000; padding-left: 5px;">Matrícula</td>
-					<td width="100px" style="font-weight: 700; border:1px solid #000; padding-left: 5px;">CPF</td>
-				</tr>
-				<tr class="linha-da-tabela">
-					<td style=" border:1px solid #000; padding-left: 5px;">01</td>
-					<td style=" border:1px solid #000; padding-left: 5px;">João da Silva</td>
-					<td style=" border:1px solid #000; padding-left: 5px;">123456</td>
-					<td style=" border:1px solid #000; padding-left: 5px;">123.456.789-00</td>
-				</tr>
-				<tr class="linha-da-tabela">
-					<td style=" border:1px solid #000; padding-left: 5px;">02</td>
-					<td style=" border:1px solid #000; padding-left: 5px;">João da Silva</td>
-					<td style=" border:1px solid #000; padding-left: 5px;">123456</td>
-					<td style=" border:1px solid #000; padding-left: 5px;">123.456.789-00</td>
-				</tr>
-			</table> -->
+	    			<l:column >
+	    				<f:facet name="header">Matrícula</f:facet>
+	    				<l:inputText  style="color: black; width: 220px" value="#{aluno.matricula}" />
+	    			</l:column>
+	    			<l:column >
+	    				<f:facet name="header" >Email</f:facet>
+	    				<l:inputText style="color: black; width: 220px" value="#{aluno.email}" />
+	    			</l:column>
+	    			<l:column >
+	    				<f:facet name="header" class="linha-da-tabela">ID</f:facet>
+	    				 <l:outputText style="color: black; width: 220px" value="#{aluno.id}" />
+	    			</l:column>
+    				<l:column >
+	    					<l:commandButton value="Alterar" style="color: black; width=25px"
+      				 	action="#{alunoBean.alterarLinha()}" />
+    				</l:column>
+    				<l:column >
+	    					<l:commandLink value="Excluir" style="color: black; width=25px"
+      				 	action="#{alunoBean.excluirLinha()}" />
+    				</l:column>
+			</l:dataTable>
+		  </l:form>
 		</div>
 	</div>
 </h:body>

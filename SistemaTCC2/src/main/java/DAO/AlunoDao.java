@@ -38,16 +38,30 @@ public class AlunoDao {
         }
     }
 	
+	public void deleteAluno(Aluno aluno) {
+		 try
+	        {
+	            manager.remove(manager.merge(aluno));
+	            manager.flush();
+	        }
+	        catch(Exception e)
+	        {
+	            System.out.println(e);
+	        }
+	}
 	public List<Aluno> listar(){
 		return manager.createQuery(
 				"select a from Aluno a", Aluno.class)
 				.getResultList();
 	}
 	
-	public Aluno buscaPeloId(Integer id){
-		return manager.createQuery(
-				"select p from Professor p where p.id=?1", Aluno.class)
-				.setParameter(1, id)
-				.getSingleResult();
+	public Aluno buscaPeloId(Long id){
+		try {
+			Aluno aluno = manager.find(Aluno.class, id);
+			return aluno;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

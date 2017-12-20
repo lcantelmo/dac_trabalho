@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
-import javax.ejb.LocalBean;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import DAO.UsersEJB;
@@ -18,7 +16,6 @@ import utils.SessionUtils;
 
 @ManagedBean(name="users")
 @RequestScoped
-@LocalBean
 public class UsersController {
     FacesContext context = FacesContext.getCurrentInstance();
         
@@ -37,8 +34,7 @@ public class UsersController {
     		if(user != null) {
     			
     			if(user.getUserType().equals("INVALIDO")) {
-	    			FacesMessage fm = new FacesMessage("Login ou senha inválidos");
-	    			FacesContext.getCurrentInstance().addMessage("msg", fm);
+	    			context.addMessage(null,new FacesMessage( "Login ou senha inválidos"));
     			}else {
     				
     				HttpSession session = SessionUtils.getSession();
@@ -48,8 +44,7 @@ public class UsersController {
     				return redirectBean.goTo(user.getUserType());
     			}
     		}else {
-    			FacesMessage fm = new FacesMessage("Usuário inexistente");
-    			FacesContext.getCurrentInstance().addMessage("msg", fm);
+    			context.addMessage(null,new FacesMessage( "Usuário inexistente"));
     		}
 		return "/login?faces-redirect=true";
     }
