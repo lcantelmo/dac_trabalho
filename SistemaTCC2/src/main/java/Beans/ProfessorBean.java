@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import DAO.ProfessorDao;
+import Models.Aluno;
 import Models.Professor;
 
 @ManagedBean
@@ -47,6 +48,21 @@ public class ProfessorBean {
 			redirectBean.goTo();
 		}
 		
+		return null;
+	}
+	
+	public String alterar(Professor professor) {
+		 
+		if(!professor.getEmail().contains("@") || !professor.getEmail().contains("."))
+	        {
+	            context.addMessage(null, new FacesMessage("Email inválido"));
+	            return null;
+	        }
+		try {
+			dao.editProfessores(professor);
+		} catch (Exception e) {
+			context.addMessage(null, new FacesMessage("Não foi possível alterar o Professor "+e));
+		}
 		return null;
 	}
 	

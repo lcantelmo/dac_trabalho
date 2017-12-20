@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
@@ -11,6 +13,7 @@ import javax.transaction.Transactional;
 import DAO.AlunoDao;
 import DAO.ProfessorDao;
 import DAO.ProjetoDao;
+import Models.Administrador;
 import Models.Aluno;
 import Models.Professor;
 import Models.Projeto;
@@ -22,6 +25,7 @@ public class ProjetoBean {
 	private Projeto projeto = new Projeto();
 	private List<Long> alunosId = new ArrayList<>();
 	private List<Long> professoresId = new ArrayList<>();
+	FacesContext context = FacesContext.getCurrentInstance();
 	
 	@Inject
 	private ProjetoDao dao;
@@ -48,6 +52,16 @@ public class ProjetoBean {
 		this.projeto = new Projeto();
 		this.alunosId = new ArrayList<>();
 		this.professoresId = new ArrayList<>();
+	}
+	
+	public String alterar(Projeto projeto) {
+		 
+		try {
+			dao.editProjetos(projeto);
+		} catch (Exception e) {
+			context.addMessage(null, new FacesMessage("Não foi possível alterar o Projeto "+e));
+		}
+		return null;
 	}
 	
 	public List<Projeto> listar() {

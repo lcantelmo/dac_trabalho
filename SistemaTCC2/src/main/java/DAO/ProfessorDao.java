@@ -7,6 +7,8 @@ import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import Models.Aluno;
 import Models.Professor;
 
 @Stateless
@@ -20,6 +22,22 @@ public class ProfessorDao {
 		manager.persist(professor);
 		manager.flush();
 	}
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Professor editProfessores(Professor professor) throws Exception {
+        try
+        {
+        		manager.merge(professor);
+        		manager.flush();
+        		return professor;
+        }
+        catch(Exception e)
+        {
+            
+            System.out.println(e);
+            return null;
+        }
+    }
 	
 	public List<Professor> listar(){
 		return manager.createQuery(

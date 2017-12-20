@@ -95,7 +95,7 @@ public class AlunoBean {
 		try {
 			dao.editAlunos(aluno);
 		} catch (Exception e) {
-			context.addMessage(null, new FacesMessage("Não foi possível alterar aluno"+e));
+			context.addMessage(null, new FacesMessage("Não foi possível alterar o Aluno "+e));
 		}
 		return null;
 	}
@@ -103,7 +103,7 @@ public class AlunoBean {
 	public void alterarLinha() {
 		Aluno alunoSelecionado = (Aluno) dataTable.getRowData();
 		Aluno alunoSalvo = null ;
-        System.out.println("Aluno Selecionada  = "+alunoSelecionado.getId() + "|" + alunoSelecionado.getName());
+        System.out.println("Aluno Selecionado  = "+alunoSelecionado.getId() + "|" + alunoSelecionado.getName());
         
         if(listaAlunos != null) {
         	 alunoSalvo	= listaAlunos.get(dataTable.getRowIndex());

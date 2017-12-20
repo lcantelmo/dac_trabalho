@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import DAO.AdminDao;
 import Models.Administrador;
+import Models.Aluno;
 
 @ManagedBean
 @RequestScoped
@@ -47,6 +48,21 @@ public class AdminBean {
 			redirectBean.goTo();
 		}
 		
+		return null;
+	}
+	
+	public String alterar(Administrador admin) {
+		 
+		if(!admin.getEmail().contains("@") || !admin.getEmail().contains("."))
+	        {
+	            context.addMessage(null, new FacesMessage("Email inválido"));
+	            return null;
+	        }
+		try {
+			dao.editAdministradors(admin);
+		} catch (Exception e) {
+			context.addMessage(null, new FacesMessage("Não foi possível alterar o Administrador "+e));
+		}
 		return null;
 	}
 	

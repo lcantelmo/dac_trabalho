@@ -2,13 +2,33 @@ package DAO;
 
 import java.util.List;
 
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import Models.Administrador;
 import Models.Projeto;
 
 public class ProjetoDao {
 	@PersistenceContext
 	private EntityManager manager;
+	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+    public Projeto editProjetos(Projeto projeto) throws Exception {
+        try
+        {
+        		manager.merge(projeto);
+        		manager.flush();
+        		return projeto;
+        }
+        catch(Exception e)
+        {
+            
+            System.out.println(e);
+            return null;
+        }
+    }
 	
 	public void salvar(Projeto projeto) {
 		manager.persist(projeto);
