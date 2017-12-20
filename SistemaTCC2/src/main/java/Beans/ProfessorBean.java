@@ -65,6 +65,23 @@ public class ProfessorBean {
 		}
 		return null;
 	}
+	public void alterarLinha(Professor aluno) {
+		String a = aluno.getName();
+		System.out.println(a);
+//		Aluno alunoSelecionado = (Aluno) dataTable.getRowData();
+//		Aluno alunoSalvo = null ;
+//        System.out.println("Aluno Selecionado  = "+alunoSelecionado.getId() + "|" + alunoSelecionado.getName());
+//        
+//        if(listaAlunos != null) {
+//        	 alunoSalvo	= listaAlunos.get(dataTable.getRowIndex());
+//        }
+//        if(alunoSalvo!= null && !comparaAlunoALterado(alunoSalvo, alunoSelecionado)) {
+//        		alterar(alunoSelecionado);
+//        }else {
+//        	FacesMessage fm = new FacesMessage("Nenhuma mudança");
+//			FacesContext.getCurrentInstance().addMessage("msg", fm);
+//        }
+	}
 	
 	public List<Professor> listar() {
 		return dao.listar();

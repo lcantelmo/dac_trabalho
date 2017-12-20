@@ -171,47 +171,46 @@
 				<input placeholder="   Pesquisar..." style="margin-left: 5px; height: 30px; border: 0;" type="text" name="pesquisar" id="pesquisar" size="25" />
 			
 			<a href="#">
-				<img src="../images/search.png" height="30px" style="margin-bottom: -11px; margin-left: -2px;" />
+				<img src="images/search.png" height="30px" style="margin-bottom: -11px; margin-left: -2px;" />
 			</a>
 		</div>
 		
 		<div class="aplicar-fonte" style="width: 900px; padding-top: 10px; padding-bottom: 10px; padding-left: 100px; margin-top: 0px;" align="left">
 		 <!-- <p:accordionPanel activeIndex="0" autoHeight="false"> -->  	
-		<l:form>
-			<l:dataTable binding="#{alunoBean.dataTable}" value="#{alunoBean.listar()}" var="aluno"  cellspacing="0" 
+		<h:form>
+			<h:dataTable binding="#{alunoBean.dataTable}" value="#{alunoBean.listar()}" var="aluno"  cellspacing="0" 
 			styleClass="order-table"
     			headerClass="order-table-header"
     			rowClasses="order-table-odd-row,order-table-even-row">
     				
-	    			<l:column >
-	    				<f:facet name="header" >Nome</f:facet>
-	    				<l:inputText style="color: black; width: 220px" value="#{aluno.name}" >
-	    					<g:ajax event="keyup" update="out1" />
-	    				</l:inputText>
-	    			</l:column>
+	    			<h:column >
+	    				<f:facet name="1" >Nome</f:facet>
+	    				<l:outputText style="color: black; width: 220px" value="#{aluno.name}" >
+	    				</l:outputText>
+	    			</h:column >
 	
-	    			<l:column >
-	    				<f:facet name="header">Matrícula</f:facet>
-	    				<l:inputText  style="color: black; width: 220px" value="#{aluno.matricula}" />
-	    			</l:column>
-	    			<l:column >
-	    				<f:facet name="header" >Email</f:facet>
-	    				<l:inputText style="color: black; width: 220px" value="#{aluno.email}" />
-	    			</l:column>
-	    			<l:column >
-	    				<f:facet name="header" class="linha-da-tabela">ID</f:facet>
+	    			<h:column  >
+	    				<f:facet name="2">Matrícula</f:facet>
+	    				<l:outputText  style="color: black; width: 220px" value="#{aluno.matricula}" />
+	    			</h:column >
+	    			<h:column  >
+	    				<f:facet name="3" >Email</f:facet>
+	    				<l:outputText style="color: black; width: 220px" value="#{aluno.email}" />
+	    			</h:column >
+	    			<h:column  >
+	    				<f:facet name="4" class="linha-da-tabela">ID</f:facet>
 	    				 <l:outputText style="color: black; width: 220px" value="#{aluno.id}" />
-	    			</l:column>
-    				<l:column >
+	    			</h:column >
+    				<h:column  >
 	    					<l:commandButton value="Alterar" style="color: black; width=25px"
-      				 	action="#{alunoBean.alterarLinha()}" />
-    				</l:column>
-    				<l:column >
+      				 	action="#{alunoBean.alterarLinha()}"  />
+    				</h:column >
+    				<h:column  >
 	    					<l:commandLink value="Excluir" style="color: black; width=25px"
       				 	action="#{alunoBean.excluirLinha()}" />
-    				</l:column>
-			</l:dataTable>
-		  </l:form>
+    				</h:column >
+			</h:dataTable>
+		  </h:form>
 		</div>
 	</div>
 </h:body>

@@ -3,27 +3,34 @@ package Beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.inject.spi.Bean;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Inject;
 
 import DAO.AlunoDao;
 import Models.Aluno;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class AlunoBean {
-	private Aluno aluno = new Aluno();
-	  FacesContext context = FacesContext.getCurrentInstance();
-	
 	@Inject
 	private AlunoDao dao;
 	
 	@Inject
 	private RedirectBean redirectBean;
+	
+	private Aluno aluno = new Aluno();
+	
+	private Aluno alunoSelecionado = new Aluno();
+	private int  indexAluno = -1;
+	FacesContext context = FacesContext.getCurrentInstance();
+	
+	private String nameChanged;
 	
 	private HtmlDataTable dataTable;
 	   
@@ -85,31 +92,28 @@ public class AlunoBean {
 		}
 	}
 
-	public String alterar(Aluno aluno) {
-		 
-		if(!aluno.getEmail().contains("@") || !aluno.getEmail().contains("."))
-	        {
-	            context.addMessage(null, new FacesMessage("Email inválido"));
-	            return null;
-	        }
-		try {
-			dao.editAlunos(aluno);
-		} catch (Exception e) {
-			context.addMessage(null, new FacesMessage("Não foi possível alterar o Aluno "+e));
-		}
-		return null;
+	
+	
+	public String alterarLinha() {
+		setAlunoSelecionado((Aluno) dataTable.getRowData());
+		indexAluno = dataTable.getRowIndex();
+		return "/aluno/formAluno.xhtml?faces-redirect=true";
 	}
 	
-	public void alterarLinha() {
-		Aluno alunoSelecionado = (Aluno) dataTable.getRowData();
+	public void alterar() {
 		Aluno alunoSalvo = null ;
-        System.out.println("Aluno Selecionado  = "+alunoSelecionado.getId() + "|" + alunoSelecionado.getName());
+        System.out.println("Aluno Selecionado  = "+getAlunoSelecionado().getId() + "|" + getAlunoSelecionado().getName());
         
-        if(listaAlunos != null) {
-        	 alunoSalvo	= listaAlunos.get(dataTable.getRowIndex());
-        }
-        if(alunoSalvo!= null && !comparaAlunoALterado(alunoSalvo, alunoSelecionado)) {
-        		alterar(alunoSelecionado);
+       List<Aluno> alunos = listar();
+       alunoSalvo = alunos.get(indexAluno);
+       
+       if(alunoSalvo!= null && !comparaAlunoALterado(alunoSalvo, getAlunoSelecionado())) {
+        		try {
+					dao.editAlunos(alunoSelecionado);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
         }else {
         	FacesMessage fm = new FacesMessage("Nenhuma mudança");
 			FacesContext.getCurrentInstance().addMessage("msg", fm);
@@ -157,6 +161,24 @@ public class AlunoBean {
 	
 	public void setDataTable(HtmlDataTable dataTable) {
 		this.dataTable = dataTable;
-	}            
+	}
+
+	public String getNameChanged() {
+		return nameChanged;
+	}
+
+	public void setNameChanged(String nameChanged) {
+		this.nameChanged = nameChanged;
+	}
+
+	public Aluno getAlunoSelecionado() {
+		return alunoSelecionado;
+	}
+
+	public void setAlunoSelecionado(Aluno alunoSelecionado) {
+		this.alunoSelecionado = alunoSelecionado;
+	}         
+	
+
 	
 }
