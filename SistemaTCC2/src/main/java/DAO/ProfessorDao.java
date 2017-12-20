@@ -8,7 +8,6 @@ import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import Models.Aluno;
 import Models.Professor;
 
 @Stateless
@@ -18,18 +17,19 @@ public class ProfessorDao {
 	private EntityManager manager;
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void salvar(Professor professor) {
-		manager.persist(professor);
+	public void salvar(Professor prof) {
+		manager.persist(prof);
 		manager.flush();
+		
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Professor editProfessores(Professor professor) throws Exception {
+    public Professor editProfs(Professor prof) throws Exception {
         try
         {
-        		manager.merge(professor);
+        		manager.merge(prof);
         		manager.flush();
-        		return professor;
+        		return prof;
         }
         catch(Exception e)
         {
@@ -38,17 +38,32 @@ public class ProfessorDao {
             return null;
         }
     }
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
+	public void deleteProfessor(Professor prof) {
+		 try
+	        {
+	            manager.remove(manager.merge(prof));
+	            manager.flush();
+	        }
+	        catch(Exception e)
+	        {
+	            System.out.println(e);
+	        }
+	}
 	
 	public List<Professor> listar(){
 		return manager.createQuery(
-				"select p from Professor p", Professor.class)
+				"select a from Professor a", Professor.class)
 				.getResultList();
 	}
 	
-	public Professor buscaPeloId(Integer id){
-		return manager.createQuery(
-				"select p from Professor p where p.id=?1", Professor.class)
-				.setParameter(1, id)
-				.getSingleResult();
+	public Professor buscaPeloId(Long id){
+		try {
+			Professor prof = manager.find(Professor.class, id);
+			return prof;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

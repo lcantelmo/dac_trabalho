@@ -1,23 +1,22 @@
 package Beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import DAO.ProfessorDao;
-import Models.Aluno;
 import Models.Professor;
 
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class ProfessorBean {
-	FacesContext context = FacesContext.getCurrentInstance();
-	private Professor professor = new Professor();
 	
 	@Inject
 	private ProfessorDao dao;
@@ -25,7 +24,16 @@ public class ProfessorBean {
 	@Inject
 	private RedirectBean redirectBean;
 	
+	FacesContext context = FacesContext.getCurrentInstance();
+	
+	private Professor professor = new Professor();
+	
+	private Professor profSelecionado = new Professor();
+	int indexProf = -1;
+	
 	private HtmlDataTable dataTable;
+	
+	private List<Professor> listaProfs = new ArrayList<>();
 	   
 	public String salvar() {
 		professor.setUserType("prof");
@@ -59,32 +67,65 @@ public class ProfessorBean {
 	            return null;
 	        }
 		try {
-			dao.editProfessores(professor);
+			dao.editProfs(professor);
 		} catch (Exception e) {
 			context.addMessage(null, new FacesMessage("Não foi possível alterar o Professor "+e));
 		}
-		return null;
-	}
-	public void alterarLinha(Professor aluno) {
-		String a = aluno.getName();
-		System.out.println(a);
-//		Aluno alunoSelecionado = (Aluno) dataTable.getRowData();
-//		Aluno alunoSalvo = null ;
-//        System.out.println("Aluno Selecionado  = "+alunoSelecionado.getId() + "|" + alunoSelecionado.getName());
-//        
-//        if(listaAlunos != null) {
-//        	 alunoSalvo	= listaAlunos.get(dataTable.getRowIndex());
-//        }
-//        if(alunoSalvo!= null && !comparaAlunoALterado(alunoSalvo, alunoSelecionado)) {
-//        		alterar(alunoSelecionado);
-//        }else {
-//        	FacesMessage fm = new FacesMessage("Nenhuma mudança");
-//			FacesContext.getCurrentInstance().addMessage("msg", fm);
-//        }
+		return "/aluno/alterarAluno.xhtml?faces-redirect=true";
 	}
 	
+	public String alterarLinha() {
+		setProfSelecionado((Professor) dataTable.getRowData());
+		indexProf = dataTable.getRowIndex();
+		return "/professor/formProfessor.xhtml?faces-redirect=true";
+	}
+	
+	public void alterar() {
+		Professor profSalvo= null ;
+        System.out.println("Professor Selecionado  = "+getProfSelecionado().getId() + "|" + getProfSelecionado().getName());
+        
+       List<Professor> profs = listar();
+       profSalvo = profs.get(indexProf);
+       
+       if(profSalvo!= null && !comparaProfALterado(profSalvo, getProfSelecionado())) {
+        		try {
+					dao.editProfs(profSelecionado);
+					FacesMessage fm = new FacesMessage("Professor alterado com sucesso");
+					FacesContext.getCurrentInstance().addMessage("msg", fm);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+        }else {
+        	FacesMessage fm = new FacesMessage("Nenhuma mudança");
+			FacesContext.getCurrentInstance().addMessage("msg", fm);
+        }
+	}
+	
+	private boolean comparaProfALterado(Professor profSalvo, Professor profSelecionado) {
+		return profSalvo.getEmail().equals(profSelecionado.getEmail()) &&
+				profSalvo.getMatricula().equals(profSelecionado.getMatricula()) &&
+				profSalvo.getName().equals(profSelecionado.getName()) &&
+				profSalvo.getUserType().equals(profSelecionado.getUserType());
+	}
+	
+	public String excluirLinha() {
+		Professor profSelecionado = (Professor) dataTable.getRowData();
+		try {
+			dao.deleteProfessor(dao.buscaPeloId(profSelecionado.getId()));
+			this.listaProfs  = dao.listar();
+			context.addMessage(null, new FacesMessage("Aluno excluído"));
+			return "/aluno/alterarAluno.xhtml?faces-redirect=true";
+		}
+		catch(Exception e)
+		{
+			context.addMessage(null, new FacesMessage("Não foi possível excluir aluno"+e));
+			return null;
+		}
+	}
 	public List<Professor> listar() {
-		return dao.listar();
+		listaProfs = dao.listar();
+		return listaProfs;
 	}
 
 	public Professor getProfessor() {
@@ -101,5 +142,13 @@ public class ProfessorBean {
 
 	public void setDataTable(HtmlDataTable dataTable) {
 		this.dataTable = dataTable;
+	}
+
+	public Professor getProfSelecionado() {
+		return profSelecionado;
+	}
+
+	public void setProfSelecionado(Professor profSelecionado) {
+		this.profSelecionado = profSelecionado;
 	}
 }

@@ -167,13 +167,6 @@
 			</h:form>
 				<h:messages/>
 			</div>
-		<div class="aplicar-fonte" style="width: 810px; padding-top: 10px; padding-bottom: 10px; padding-left: 0px; margin-top: 20px;" align="left">
-				<input placeholder="   Pesquisar..." style="margin-left: 5px; height: 30px; border: 0;" type="text" name="pesquisar" id="pesquisar" size="25" />
-			
-			<a href="#">
-				<img src="images/search.png" height="30px" style="margin-bottom: -11px; margin-left: -2px;" />
-			</a>
-		</div>
 		
 		<div class="aplicar-fonte" style="width: 900px; padding-top: 10px; padding-bottom: 10px; padding-left: 100px; margin-top: 0px;" align="left">
 		 <!-- <p:accordionPanel activeIndex="0" autoHeight="false"> -->  	
@@ -184,27 +177,25 @@
     			rowClasses="order-table-odd-row,order-table-even-row">
     				
 	    			<h:column >
-	    				<f:facet name="header" >Nome</f:facet>
-	    				<h:inputText style="color: black; width: 220px" value="" >
-	    					<!-- <g:ajax event="keyup" update="out1" /> -->
-	    				</h:inputText>
+	    				<f:facet name="name" >Nome</f:facet>
+	    				<h:outputText style="color: black; width: 220px" value="#{admin.name}" />
 	    			</h:column>
 	
 	    			<h:column >
-	    				<f:facet name="header">Matrícula</f:facet>
-	    				<h:inputText  style="color: black; width: 220px" value="#{admin.matricula}" />
+	    				<f:facet name="mat">Matrícula</f:facet>
+	    				<h:outputText  style="color: black; width: 220px" value="#{admin.matricula}" />
 	    			</h:column>
 	    			<h:column >
-	    				<f:facet name="header" >Email</f:facet>
-	    				<h:inputText style="color: black; width: 220px" value="#{admin.email}" />
+	    				<f:facet name="email" >Email</f:facet>
+	    				<h:outputText style="color: black; width: 220px" value="#{admin.email}" />
 	    			</h:column>
 	    			<h:column >
-	    				<f:facet name="header" class="linha-da-tabela">ID</f:facet>
+	    				<f:facet name="id" class="linha-da-tabela">ID</f:facet>
 	    				 <h:outputText style="color: black; width: 220px" value="#{admin.id}" />
 	    			</h:column>
     				<h:column >
-	    					<h:commandButton value="Alterar" style="color: black; width=25px"
-      				 	action="#{adminBean.alterarLinha(admin)}" />
+	    					<h:commandLink value="Alterar" style="color: black; width=25px"
+      				 	action="#{adminBean.alterarLinha()}" />
     				</h:column>
     				<h:column >
 	    					<h:commandLink value="Excluir" style="color: black; width=25px"

@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import Models.Administrador;
+import Models.Aluno;
 
 @Stateless
 public class AdminDao {
@@ -16,6 +17,7 @@ public class AdminDao {
 	@PersistenceContext
 	private EntityManager manager;
 	
+
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void salvar(Administrador admin) {
 		manager.persist(admin);
@@ -24,7 +26,7 @@ public class AdminDao {
 	}
 	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public Administrador editAdministradors(Administrador admin) throws Exception {
+    public Administrador editAdmin(Administrador admin) throws Exception {
         try
         {
         		manager.merge(admin);
@@ -38,9 +40,8 @@ public class AdminDao {
             return null;
         }
     }
-	
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void deleteAdministradorAdministrador(Administrador admin) {
+	public void deleteAdmin(Administrador admin) {
 		 try
 	        {
 	            manager.remove(manager.merge(admin));
@@ -59,19 +60,12 @@ public class AdminDao {
 	}
 	
 	public Administrador buscaPeloId(Long id){
-		return manager.createQuery(
-				"select p from Administrador p where p.id=?1", Administrador.class)
-				.setParameter(1, id)
-				.getSingleResult();
-	}
-	
-	public void editarDados(Long id, String nome, String matricula, String email) {
-		Administrador admin = this.buscaPeloId(id);
-		admin.setName(nome);
-		admin.setMatricula(matricula);
-		admin.setEmail(email);
-		manager.persist(admin);
-		manager.flush();
-				
+		try {
+			Administrador admin = manager.find(Administrador.class, id);
+			return admin;
+		}catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }

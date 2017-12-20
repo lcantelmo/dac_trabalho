@@ -102,22 +102,22 @@
 		
 				<div style="padding-bottom: 20px;">
 					<h:outputLabel value="Nome:"/>
-		    			<h:inputText value="#{professorBean.professor.name}" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
+		    			<h:inputText value="#{professorBean.profSelecionado.name}" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
 				</div>	
 				
 				<div style="padding-bottom: 20px;">
 					<h:outputLabel value="Matrícula:"/>
-	    				<h:inputText value="#{professorBean.professor.matricula}" style="margin-left: 24px;"  size="23" aria-required="true" aria-invalid="false" />
+	    				<h:inputText value="#{professorBean.profSelecionado.matricula}" style="margin-left: 24px;"  size="23" aria-required="true" aria-invalid="false" />
 				</div>
 				
 				<div style="padding-bottom: 20px;">
 					<h:outputLabel value="Email:"/>
-	    				<h:inputText value="#{professorBean.professor.email}" style="margin-left: 25px;" type="text"  size="27" aria-required="true" aria-invalid="false" />
+	    				<h:inputText value="#{professorBean.profSelecionado.email}" style="margin-left: 25px;" type="text"  size="27" aria-required="true" aria-invalid="false" />
 				</div>
 				
 				<div style="padding-bottom: 20px;">
 					<h:outputLabel value="Senha:"/>
-	    		<h:inputSecret value="#{professorBean.professor.password}" style="margin-left: 25px;" type="text"  size="27" aria-required="true" aria-invalid="false" />
+	    		<h:inputSecret value="#{professorBean.profSelecionado.password}" style="margin-left: 25px;" type="text"  size="27" aria-required="true" aria-invalid="false" />
 				</div>
 				
 				<div style="padding-bottom: 40px;">
@@ -126,14 +126,11 @@
 				</div>
 				
 				<div align="right" style="padding-right: 90px; padding-bottom: 25px; padding-top: 20px;">
-						<h:commandButton style="color: #000;" value="Criar" action="#{professorBean.salvar()}"/>
+						<h:commandLink style="color: #000;" value="Alterar" action="#{professorBean.alterar()}"/>
 				</div>
-				<h:messages />
 			</div>
 		</h:form>
+				<h:messages />
 	</div>
-	
-	
-
 </h:body>
 </html>

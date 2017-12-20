@@ -24,13 +24,13 @@ public class AlunoBean {
 	@Inject
 	private RedirectBean redirectBean;
 	
+	FacesContext context = FacesContext.getCurrentInstance();
+	
 	private Aluno aluno = new Aluno();
 	
 	private Aluno alunoSelecionado = new Aluno();
 	private int  indexAluno = -1;
-	FacesContext context = FacesContext.getCurrentInstance();
 	
-	private String nameChanged;
 	
 	private HtmlDataTable dataTable;
 	   
@@ -100,7 +100,7 @@ public class AlunoBean {
 		return "/aluno/formAluno.xhtml?faces-redirect=true";
 	}
 	
-	public void alterar() {
+	public String alterar() {
 		Aluno alunoSalvo = null ;
         System.out.println("Aluno Selecionado  = "+getAlunoSelecionado().getId() + "|" + getAlunoSelecionado().getName());
         
@@ -120,6 +120,7 @@ public class AlunoBean {
         	FacesMessage fm = new FacesMessage("Nenhuma mudança");
 			FacesContext.getCurrentInstance().addMessage("msg", fm);
         }
+       return "/aluno/alterarAluno.xhtml?faces-redirect=true";
 	}
 	
 	private boolean comparaAlunoALterado(Aluno alunoSalvo, Aluno alunoSelecionado) {
@@ -163,14 +164,6 @@ public class AlunoBean {
 	
 	public void setDataTable(HtmlDataTable dataTable) {
 		this.dataTable = dataTable;
-	}
-
-	public String getNameChanged() {
-		return nameChanged;
-	}
-
-	public void setNameChanged(String nameChanged) {
-		this.nameChanged = nameChanged;
 	}
 
 	public Aluno getAlunoSelecionado() {

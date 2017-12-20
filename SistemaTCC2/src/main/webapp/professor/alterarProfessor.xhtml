@@ -1,9 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core" 
-	xmlns:l="http://java.sun.com/jsf/html"
-	xmlns:g="http://java.sun.com/jsf/core" >
+	xmlns:f="http://xmlns.jcp.org/jsf/core" >
 	
 <h:head>
 
@@ -160,7 +158,6 @@
 				</div>
 				
 				<div align="right" style="padding-right: 90px; padding-bottom: 25px; padding-top: 20px;color: black; background-color: #fff;">
-						<!-- a href="#" style="color: #000; padding-right: 115px;">LIMPAR</a> -->
 						<h:commandLink style="color: black;background-color: #fff;" value="SALVAR" action="#{professorBean.salvar()}"/>
 				</div>
 				
@@ -176,42 +173,40 @@
 		</div>
 		
 		<div class="aplicar-fonte" style="width: 900px; padding-top: 10px; padding-bottom: 10px; padding-left: 100px; margin-top: 0px;" align="left">
-		 <!-- <p:accordionPanel activeIndex="0" autoHeight="false"> -->  	
-		<l:form>
-			<l:dataTable binding="#{professorBean.dataTable}" value="#{professorBean.listar()}" var="professor"  cellspacing="0" 
+		<h:form>
+			<h:dataTable binding="#{professorBean.dataTable}" value="#{professorBean.listar()}" var="professor" 
 			styleClass="order-table"
     			headerClass="order-table-header"
     			rowClasses="order-table-odd-row,order-table-even-row">
     				
-	    			<l:column >
-	    				<f:facet name="header" >Nome</f:facet>
-	    				<f:inputText style="color: black; width: 220px" value="#{professor.name}" valueChangeListener="#{alunoBean.nameChanged}">
-	    					<f:ajax />
-	    				</f:inputText>
-	    			</l:column>
+	    			<h:column >
+	    				<f:facet name="name" >Nome</f:facet>
+	    				<h:outputText style="color: black; width: 220px" value="#{professor.name}" >
+	    				</h:outputText>
+	    			</h:column>
 	
-	    			<l:column >
-	    				<f:facet name="header">Matrícula</f:facet>
-	    				<l:inputText  style="color: black; width: 220px" value="#{professor.matricula}" />
-	    			</l:column>
-	    			<l:column >
-	    				<f:facet name="header" >Email</f:facet>
-	    				<l:inputText style="color: black; width: 220px" value="#{professor.email}" />
-	    			</l:column>
-	    			<l:column >
-	    				<f:facet name="header" class="linha-da-tabela">ID</f:facet>
-	    				 <l:outputText style="color: black; width: 220px" value="#{professor.id}" />
-	    			</l:column>
-    				<l:column >
-	    					<l:commandButton value="Alterar" style="color: black; width=25px"
-      				 	action="#{professorBean.alterarLinha(professor)}" />
-    				</l:column>
-    				<l:column >
-	    					<l:commandLink value="Excluir" style="color: black; width=25px"
+	    			<h:column >
+	    				<f:facet name="mat">Matrícula</f:facet>
+	    				<h:outputText  style="color: black; width: 220px" value="#{professor.matricula}" />
+	    			</h:column>
+	    			<h:column >
+	    				<f:facet name="email" >Email</f:facet>
+	    				<h:outputText style="color: black; width: 220px" value="#{professor.email}" />
+	    			</h:column>
+	    			<h:column >
+	    				<f:facet name="id" class="linha-da-tabela">ID</f:facet>
+	    				 <h:outputText style="color: black; width: 220px" value="#{professor.id}" />
+	    			</h:column>
+    				<h:column >
+	    					<h:commandLink value="Alterar" style="color: black; width=25px"
+      				 	action="#{professorBean.alterarLinha()}" />
+    				</h:column>
+    				<h:column >
+	    					<h:commandLink value="Excluir" style="color: black; width=25px"
       				 	action="#{professorBean.excluirLinha()}" />
-    				</l:column>
-			</l:dataTable>
-		  </l:form>
+    				</h:column>
+			</h:dataTable>
+		  </h:form>
 		</div>
 	</div>
 </h:body>

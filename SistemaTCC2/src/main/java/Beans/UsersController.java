@@ -6,7 +6,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
@@ -15,9 +15,8 @@ import Models.Usuario;
 import utils.SessionUtils;
 
 @ManagedBean(name="users")
-@RequestScoped
+@SessionScoped
 public class UsersController {
-    FacesContext context = FacesContext.getCurrentInstance();
         
     private Usuario user = new Usuario();
     
@@ -34,7 +33,8 @@ public class UsersController {
     		if(user != null) {
     			
     			if(user.getUserType().equals("INVALIDO")) {
-	    			context.addMessage(null,new FacesMessage( "Login ou senha inválidos"));
+    				FacesMessage fm = new FacesMessage("Login ou senha Inválidos");
+    				FacesContext.getCurrentInstance().addMessage("msg", fm);
     			}else {
     				
     				HttpSession session = SessionUtils.getSession();
@@ -43,10 +43,10 @@ public class UsersController {
     				
     				return redirectBean.goTo(user.getUserType());
     			}
-    		}else {
-    			context.addMessage(null,new FacesMessage( "Usuário inexistente"));
     		}
-		return "/login?faces-redirect=true";
+    		FacesMessage fm = new FacesMessage("Usuário inexistente");
+    		FacesContext.getCurrentInstance().addMessage("msg", fm);
+		return "";
     }
     
 
@@ -69,54 +69,6 @@ public class UsersController {
     public String editUsers(Usuario user){
         this.user = user; 
         return "edit.xhtml";
-    }
-    public String editUser(){
-        System.out.println("--------------------1--------------------------------");
-        System.out.println("--------------------1--------------------------------");
-        System.out.println(this.user.getId());
-        System.out.println("--------------------1--------------------------------");
-        System.out.println("--------------------1--------------------------------");
-
-        
-        if(!this.user.getEmail().contains("@") || !this.user.getEmail().contains("."))
-        {
-            context.addMessage(null, new FacesMessage("Invalid email"));
-            return null;
-        }
-
-        try
-        {
-        System.out.println("--------------------1--------------------------------");
-        System.out.println("---------------------2-------------------------------");
-            userEJB.editUsers(this.user);
-            
-        System.out.println("--------------------3--------------------------------");
-            userList = userEJB.allUsers();
-            
-        System.out.println("---------------------4-------------------------------");
-            return "index.xhtml?faces-redirect=true";
-        }
-        catch(Exception e)
-        {
-            context.addMessage(null, new FacesMessage("Kullanıcı Güncellerken Hata Oluştu... \n "+e));
-            return null;
-        }
-        
-    }
-    public String deleteUser(Usuario getUser){
-        try
-        {
-            userEJB.deleteUsers(getUser);
-            userList = userEJB.allUsers();
-            
-            context.addMessage(null, new FacesMessage("Kullanıcı Başarı ile Silindi..."));
-            return "index.xhtml?faces-redirect=true";
-        }
-        catch(Exception e)
-        {
-            context.addMessage(null, new FacesMessage("Kullanıcı Silinirken Hata Oluştu... \n "+e));
-            return null;
-        }
     }
     
    
