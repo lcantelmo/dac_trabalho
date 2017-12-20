@@ -110,6 +110,8 @@ public class AlunoBean {
        if(alunoSalvo!= null && !comparaAlunoALterado(alunoSalvo, getAlunoSelecionado())) {
         		try {
 					dao.editAlunos(alunoSelecionado);
+					FacesMessage fm = new FacesMessage("Aluno alterado com sucesso");
+					FacesContext.getCurrentInstance().addMessage("msg", fm);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

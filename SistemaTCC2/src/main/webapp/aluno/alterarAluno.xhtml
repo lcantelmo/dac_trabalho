@@ -1,9 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core" 
-	xmlns:l="http://java.sun.com/jsf/html"
-	xmlns:g="http://java.sun.com/jsf/core" >
+	xmlns:f="http://xmlns.jcp.org/jsf/core" >
 	
 <h:head>
 
@@ -122,7 +120,7 @@
 				</span>
 		</h:form>
 		
-	</div>FacesContext context = FacesContext.getCurrentInstance();
+	</div>
 	
 	<div style="color: #fff; margin-top: 100px; padding-left: 0px;"
 	class="aplicar-fonte" align="center">
@@ -160,20 +158,12 @@
 				</div>
 				
 				<div align="right" style="padding-right: 90px; padding-bottom: 25px; padding-top: 20px;color: black; background-color: #fff;">
-						<!-- a href="#" style="color: #000; padding-right: 115px;">LIMPAR</a> -->
 						<h:commandLink style="color: black;background-color: #fff;" value="SALVAR" action="#{alunoBean.salvar()}"/>
 				</div>
 				
 				</h:form>
+			<h:messages/>
 			</div>
-				<h:messages/>
-		<div class="aplicar-fonte" style="width: 810px; padding-top: 10px; padding-bottom: 10px; padding-left: 0px; margin-top: 20px;" align="left">
-				<input placeholder="   Pesquisar..." style="margin-left: 5px; height: 30px; border: 0;" type="text" name="pesquisar" id="pesquisar" size="25" />
-			
-			<a href="#">
-				<img src="images/search.png" height="30px" style="margin-bottom: -11px; margin-left: -2px;" />
-			</a>
-		</div>
 		
 		<div class="aplicar-fonte" style="width: 900px; padding-top: 10px; padding-bottom: 10px; padding-left: 100px; margin-top: 0px;" align="left">
 		 <!-- <p:accordionPanel activeIndex="0" autoHeight="false"> -->  	
@@ -184,34 +174,33 @@
     			rowClasses="order-table-odd-row,order-table-even-row">
     				
 	    			<h:column >
-	    				<f:facet name="1" >Nome</f:facet>
-	    				<l:outputText style="color: black; width: 220px" value="#{aluno.name}" >
-	    				</l:outputText>
-	    			</h:column >
+	    				<f:facet name="name" >Nome</f:facet>
+	    				<h:inputText style="color: black; width: 220px" value="#{aluno.name}" />
+	    			</h:column>
 	
-	    			<h:column  >
-	    				<f:facet name="2">Matrícula</f:facet>
-	    				<l:outputText  style="color: black; width: 220px" value="#{aluno.matricula}" />
-	    			</h:column >
-	    			<h:column  >
-	    				<f:facet name="3" >Email</f:facet>
-	    				<l:outputText style="color: black; width: 220px" value="#{aluno.email}" />
-	    			</h:column >
-	    			<h:column  >
-	    				<f:facet name="4" class="linha-da-tabela">ID</f:facet>
-	    				 <l:outputText style="color: black; width: 220px" value="#{aluno.id}" />
-	    			</h:column >
-    				<h:column  >
-	    					<l:commandButton value="Alterar" style="color: black; width=25px"
-      				 	action="#{alunoBean.alterarLinha()}"  />
-    				</h:column >
-    				<h:column  >
-	    					<l:commandLink value="Excluir" style="color: black; width=25px"
+	    			<h:column >
+	    				<f:facet name="mat">Matrícula</f:facet>
+	    				<h:inputText  style="color: black; width: 220px" value="#{aluno.matricula}" />
+	    			</h:column>
+	    			<h:column >
+	    				<f:facet name="email" >Email</f:facet>
+	    				<h:inputText style="color: black; width: 220px" value="#{aluno.email}" />
+	    			</h:column>
+	    			<h:column >
+	    				<f:facet name="id" class="linha-da-tabela">ID</f:facet>
+	    				 <h:outputText style="color: black; width: 220px" value="#{aluno.id}" />
+	    			</h:column>
+    				<h:column >
+	    					<h:commandButton value="Alterar" style="color: black; width=25px"
+      				 	action="#{alunoBean.alterarLinha()}" />
+    				</h:column>
+    				<h:column >
+	    					<h:commandLink value="Excluir" style="color: black; width=25px"
       				 	action="#{alunoBean.excluirLinha()}" />
-    				</h:column >
+    				</h:column>
 			</h:dataTable>
 		  </h:form>
 		</div>
-	</div>
-</h:body>
+		</div>
+	</h:body>
 </html>
