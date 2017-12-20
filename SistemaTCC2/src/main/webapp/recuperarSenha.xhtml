@@ -1,0 +1,109 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core" >
+<h:head>
+
+	<meta charset="utf-8"/>
+	<h:title>Recuperar Senha</h:title>
+
+
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:800" rel="stylesheet"/>
+
+	<style>
+		.alinhar-hev{
+			display: -webkit-flex;
+			display: flex;
+			-webkit-align-items: center;
+			align-items: center;
+			-webkit-justify-content: center;
+			justify-content: center;
+		}
+		
+		.alinhar-h{
+			display: -webkit-flex;
+			display: flex;
+			-webkit-justify-content: center;
+			justify-content: center;
+		}
+		
+		.alinhar-v{
+			display: -webkit-flex;
+			display: flex;
+			-webkit-align-items: center;
+			align-items: center;
+		}
+		
+		.aplicar-fonte{
+			font-family: 'Open Sans', sans-serif;
+			font-weight: 800;
+		}
+		
+		a:link, a:visited {
+			text-decoration: none;
+			color: #fff;
+		}
+		a:hover {
+			text-decoration: underline; 
+			color: #fff;
+		}
+		a:active {
+			text-decoration: none;
+		}
+		
+		::-webkit-input-placeholder { /* WebKit browsers */
+			color: #BFBFBF;
+		}
+
+		.img-transparencia-001:hover{
+			opacity: 0.80;
+			-webkit-transition: 0.25s ease-out;
+			-moz-transition: 0.25s ease-out;
+			-o-transition: 0.25s ease-out;
+			transition: 0.25s ease-out;
+		}
+	
+	</style>
+	
+</h:head>
+<h:body style="background-color:#E9EBEE;">
+
+	<div style="width: 100%; background-color: #38547B; top: 0%; left: 0%; position: absolute; color: #fff; padding-top: 15px; padding-bottom: 15px;"
+	class="aplicar-fonte">
+		
+		<span style="font-size: 19px; padding-left: 30px;">
+			<a href="/SistemaTCC2/login.xhtml?faces-redirect=true" id="botaoSaibaMais" style="width: 120px;" align="center">
+					Sistema de TCC's 
+			</a>
+		</span>
+		
+	</div>
+	
+	<div style="color: #fff; margin-top: 100px; padding-left: 0px;" class="aplicar-fonte" align="center">
+		
+		<div class="aplicar-fonte" style="background-color: #38547B; width: 600px; padding-top: 10px; padding-bottom: 10px; padding-left: 30px; margin-top: -5px;" align="left">
+				Esqueceu sua senha?
+		</div>
+		
+		<h:form>
+			<div class="aplicar-fonte" style="background-color: #fff; width: 400px; color: #000;
+			padding-left: 100px; padding-top: 40px;" align="left">
+		
+				<div style="padding-bottom: 20px;">
+					<h:outputLabel value="Matricula:"/>
+		    			<h:inputText value="#{recuperarSenhaBean.usuario.matricula}" style="margin-left: 20px;" size="28" aria-required="true" aria-invalid="false" />
+				</div>	
+								
+				<div align="right" style="padding-right: 90px; padding-bottom: 25px; padding-top: 20px;">
+						<h:commandButton value="ENVIAR" action="#{recuperarSenhaBean.enviaEmailRecuperacao()}" style="color: #000;"/>
+				</div>
+				<h:messages style="color: red"/>
+			
+			</div>
+		</h:form>
+	</div>
+	
+	
+
+</h:body>
+</html>
