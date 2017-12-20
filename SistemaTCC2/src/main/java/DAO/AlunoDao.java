@@ -37,7 +37,7 @@ public class AlunoDao {
             return null;
         }
     }
-	
+	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public void deleteAluno(Aluno aluno) {
 		 try
 	        {
@@ -49,6 +49,7 @@ public class AlunoDao {
 	            System.out.println(e);
 	        }
 	}
+	
 	public List<Aluno> listar(){
 		return manager.createQuery(
 				"select a from Aluno a", Aluno.class)

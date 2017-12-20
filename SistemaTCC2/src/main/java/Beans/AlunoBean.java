@@ -5,15 +5,13 @@ import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
-import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 
 import DAO.AlunoDao;
 import Models.Aluno;
-import Models.Usuario;
 
 @ManagedBean
 @ViewScoped
@@ -24,15 +22,12 @@ public class AlunoBean {
 	@Inject
 	private AlunoDao dao;
 	
-<<<<<<< Updated upstream
 	@Inject
 	private RedirectBean redirectBean;
 	
-=======
 	private HtmlDataTable dataTable;
 	   
 	private  List<Aluno> listaAlunos = new ArrayList<Aluno>();
->>>>>>> Stashed changes
 	
 	public String salvar() {
 		aluno.setUserType("aluno");
@@ -58,7 +53,6 @@ public class AlunoBean {
 		return null;
 	}
 	
-<<<<<<< Updated upstream
 	public String salvarNovoUsuario() {
 		aluno.setUserType("aluno");
 		if(!this.aluno.getEmail().contains("@") || !this.aluno.getEmail().contains("."))
@@ -90,10 +84,8 @@ public class AlunoBean {
 			return null;
 		}
 	}
-	public String alterar() {
-=======
+
 	public String alterar(Aluno aluno) {
->>>>>>> Stashed changes
 		 
 		if(!aluno.getEmail().contains("@") || !aluno.getEmail().contains("."))
 	        {
