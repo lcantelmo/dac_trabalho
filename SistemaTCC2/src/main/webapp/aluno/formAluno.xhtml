@@ -70,25 +70,13 @@
 
 	<div style="width: 100%; background-color: #38547B; top: 0%; left: 0%; position: absolute; color: #fff; padding-top: 15px; padding-bottom: 15px;"
 	class="aplicar-fonte">
-		<h:form>
+		
 		<span style="font-size: 19px; padding-left: 30px;">
-				<h:commandLink id="botaoSaibaMais" style="width: 120px;" align="center" 
-								 action="#{redirect.goTo()}">
-								Sistema de TCC's 
-				</h:commandLink>
+			<a href="/SistemaTCC2/login.xhtml?faces-redirect=true" id="botaoSaibaMais" style="width: 120px;" align="center">
+					Sistema de TCC's 
+			</a>
 		</span>
-				<span style="float: right;">
-					<span style="font-size: 17px; padding-right: 200px;">
-						Bem-vindo(a) <h:outputText value="#{sessionScope.name}" /> 
-					</span>
-			
-					<span style="font-size: 17px;padding-right: 20px;">
-						<h:commandLink value="Sair" action="#{users.logOut}">
-							<h:graphicImage value="../images/icon-logout.png" height="25px" style="margin-bottom: -7px;"/>
-						</h:commandLink>
-					</span>
-				</span>
-		</h:form>
+		
 	</div>
 	
 	<div style="color: #fff; margin-top: 100px; padding-left: 0px;" class="aplicar-fonte" align="center">
@@ -127,9 +115,9 @@
 				</div>
 				
 				<div align="right" style="padding-right: 90px; padding-bottom: 25px; padding-top: 20px;">
-						<h:commandButton style="color: #000;" value="Criar" action="#{alunoBean.salvar()}"/>
+						<h:commandButton value="Criar" action="#{alunoBean.salvarNovoUsuario()}" style="color: #000;"/>
 				</div>
-				<h:message for="msg" style="color: red"/>
+				<h:messages style="color: red"/>
 			
 			</div>
 		</h:form>

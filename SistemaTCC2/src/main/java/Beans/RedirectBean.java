@@ -33,9 +33,12 @@ public class RedirectBean {
     
     public String goTo(String userType) {
 		
-    		if(userType.equals("aluno")) {
-    			return "/aluno/homeAluno.xhtml?faces-redirect=true";
-    		}
-    		return "";
+    	if(userType.equals("admin")) {
+			return "/admin/homeAdmin.xhtml?faces-redirect=true";
+		}else if (userType.equals("aluno")) {
+			return "/aluno/homeAluno.xhtml?faces-redirect=true";
+		}else {
+			return "/professor/homeProfessor.xhtml?faces-redirect=true";
+    	}
 }
 }
